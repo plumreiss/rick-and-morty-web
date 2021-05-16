@@ -17,29 +17,40 @@ export default function Character({ character }) {
 }
 
 export async function getStaticPaths() {
-  let page = 1;
-  let paths = [];
-  let next = null;
-  do {
-    const res = await fetch(
-      `https://rickandmortyapi.com/api/character/?page=${page}`
-    );
-    const data = await res.json();
-    next = data.info.next;
+  const API = "https://rickandmortyapi.com/api";
 
-    paths.push(
-      ...data.results.map(({ id }) => {
-        return { params: { id: `${id}` } };
-      })
-    );
-    ++page;
-  } while (next !== null);
+  const res = await fetch(`${API}/character`);
+  const data = await res.json();
+  const pages = Array.from({ length: data.info.pages }, (v, i) => i + 1);
+
+  const pagesRes = await Promise.all(
+    pages.map((page) => {
+      const resCharacters = fetch(`${API}/character/?page=${page}`);
+      return resCharacters;
+    })
+  );
+
+  const characters = await Promise.all(
+    pagesRes.map((pageCharacters) => {
+      return pageCharacters.json();
+    })
+  );
+
+  const charactersID = characters.map((charactersPage) =>
+    charactersPage.results.map((character) => character.id)
+  );
+
+  const paths = charactersID.flat().map((characterID) => {
+    return {
+      params: { id: `${characterID}` },
+    };
+  });
 
   console.log(paths);
 
   return {
     paths: paths,
-    fallback: false, // See the "fallback" section below
+    fallback: false,
   };
 }
 
