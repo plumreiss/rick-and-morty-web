@@ -33,8 +33,30 @@ export default function Location({ location, residents }) {
 }
 
 export async function getStaticPaths() {
+  const res = await fetch(`${API}/location`);
+  const data = await res.json();
+  const pages = Array.from({ length: data.info.pages }, (v, i) => i + 1);
+
+  const pagesRes = await Promise.all(
+    pages.map((page) => fetch(`${API}/location/?page=${page}`))
+  );
+
+  const locationsPage = await Promise.all(
+    pagesRes.map((location) => location.json())
+  );
+
+  const locationsID = locationsPage.map((locationPage) =>
+    locationPage.results.map((location) => location.id)
+  );
+
+  const paths = locationsID.flat().map((locationID) => {
+    return {
+      params: { id: `${locationID}` },
+    };
+  });
+
   return {
-    paths: [{ params: { id: "1" } }],
+    paths,
     fallback: false,
   };
 }
