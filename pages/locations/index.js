@@ -4,7 +4,7 @@ export default function Locations({ locations }) {
   return (
     <div>
       {locations.map(({ id, name, type, dimension }) => (
-        <div>
+        <div key={id}>
           <h2>{name}</h2>
           <p>{type}</p>
           <p>{dimension}</p>
