@@ -3,7 +3,12 @@ import Image from "next/image";
 export default function Character({ character }) {
   return (
     <div>
-      <Image src={character.image} width={200} height={200} />
+      <Image
+        src={character.image}
+        width={200}
+        height={200}
+        alt={character.name}
+      />
       <div>
         <p>{character.name}</p>
         <p>{character.status}</p>
@@ -46,10 +51,8 @@ export async function getStaticPaths() {
     };
   });
 
-  console.log(paths);
-
   return {
-    paths: paths,
+    paths,
     fallback: false,
   };
 }
