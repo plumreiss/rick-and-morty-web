@@ -1,7 +1,22 @@
+import Link from "next/link";
+
 const API = "https://rickandmortyapi.com/api";
 
-export default function Episodes() {
-  return <h1>Desde episodes</h1>;
+export default function Episodes({ episodes }) {
+  return (
+    <div>
+      {episodes.map(({ id, name, air_date, episode }) => (
+        <div key={id}>
+          <h2>{name}</h2>
+          <p>{air_date}</p>
+          <p>{episode}</p>
+          <Link href={`/episodes/${id}`}>
+            <a>View characters</a>
+          </Link>
+        </div>
+      ))}
+    </div>
+  );
 }
 
 export async function getStaticProps() {
@@ -22,8 +37,6 @@ export async function getStaticProps() {
   );
 
   const episodes = episodesJson.map((el) => el.results).flat();
-
-  console.log(episodes);
 
   return {
     props: {
