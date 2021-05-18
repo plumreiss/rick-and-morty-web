@@ -35,7 +35,6 @@ export default function Characters() {
     setCharacters([]);
     setPagination((prevPagination) => --prevPagination);
   };
-  console.log(characters);
 
   return (
     <div>
