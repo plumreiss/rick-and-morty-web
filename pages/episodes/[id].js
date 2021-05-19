@@ -1,9 +1,28 @@
-const API = "https://rickandmortyapi.com/api";
-export default function episode({ episode, characters }) {
-  console.log(episode);
-  console.log(characters);
+import Image from "next/image";
+import Link from "next/link";
 
-  return <h1>Hello</h1>;
+const API = "https://rickandmortyapi.com/api";
+export default function episode({ _episode, characters }) {
+  const { name, air_date, episode } = _episode;
+
+  return (
+    <div>
+      <h2>{name}</h2>
+      <p>{episode}</p>
+      <p>{air_date}</p>
+      <h2>Characters appear in {episode}</h2>
+      {characters.map(({ id, name, status, image }) => (
+        <div key={id}>
+          <Image src={image} width={200} height={200} />
+          <h2>{name}</h2>
+          <p>{status}</p>
+          <Link href={`/characters/${id}`}>
+            <a>View character</a>
+          </Link>
+        </div>
+      ))}
+    </div>
+  );
 }
 
 export async function getStaticPaths() {
@@ -38,10 +57,10 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const res = await fetch(`${API}/episode/${params.id}`);
-  const episode = await res.json();
+  const _episode = await res.json();
 
   const charactersRes = await Promise.all(
-    episode.characters.map((character) => fetch(character))
+    _episode.characters.map((character) => fetch(character))
   );
 
   const characters = await Promise.all(
@@ -50,7 +69,7 @@ export async function getStaticProps({ params }) {
 
   return {
     props: {
-      episode,
+      _episode,
       characters,
     },
   };
