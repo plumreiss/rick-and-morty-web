@@ -1,5 +1,8 @@
 const API = "https://rickandmortyapi.com/api";
-export default function episode() {
+export default function episode({ episode, characters }) {
+  console.log(episode);
+  console.log(characters);
+
   return <h1>Hello</h1>;
 }
 
@@ -33,8 +36,22 @@ export async function getStaticPaths() {
   };
 }
 
-export async function getStaticProps() {
+export async function getStaticProps({ params }) {
+  const res = await fetch(`${API}/episode/${params.id}`);
+  const episode = await res.json();
+
+  const charactersRes = await Promise.all(
+    episode.characters.map((character) => fetch(character))
+  );
+
+  const characters = await Promise.all(
+    charactersRes.map((character) => character.json())
+  );
+
   return {
-    props: {},
+    props: {
+      episode,
+      characters,
+    },
   };
 }
