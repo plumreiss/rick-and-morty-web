@@ -2,9 +2,18 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
+const initialForm = {
+  name: "",
+  status: "",
+  species: "",
+  type: "",
+  gender: "",
+};
+
 export default function Characters() {
   const [characters, setCharacters] = useState([]);
   const [pagination, setPagination] = useState(1);
+  const [form, setForm] = useState(initialForm);
 
   useEffect(() => {
     const getCharacters = async () => {
@@ -26,6 +35,10 @@ export default function Characters() {
     getCharacters();
   }, [pagination]);
 
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
   const nextPage = () => {
     setCharacters([]);
     setPagination((prevPagination) => ++prevPagination);
@@ -38,17 +51,23 @@ export default function Characters() {
 
   return (
     <div>
-      <div>
-        {pagination > 1 ? (
-          <button onClick={prevPage}>←</button>
-        ) : (
-          <Link href="/">
-            <a>← Back Home</a>
-          </Link>
-        )}
-        {pagination < 34 && <button onClick={nextPage}>→</button>}
-      </div>
-
+      <form>
+        <label>Name</label>
+        <input
+          type="text"
+          name="name"
+          placeholder="Name"
+          onChange={handleChange}
+          value={form.name}
+        />
+        <label>Status</label>
+        <select name="status" onChange={handleChange} defaultValue="">
+          <option value="">---</option>
+          <option value="alive">Alive</option>
+          <option value="dead">Dead</option>
+          <option value="unknow">Unknow</option>
+        </select>
+      </form>
       {characters.map(({ id, name, img, status }) => (
         <div key={id}>
           <Image src={img} alt={name} width={200} height={200} />
@@ -61,8 +80,14 @@ export default function Characters() {
       ))}
 
       <div>
-        <button onClick={prevPage}>←</button>
-        <button onClick={nextPage}>→</button>
+        {pagination > 1 ? (
+          <button onClick={prevPage}>←</button>
+        ) : (
+          <Link href="/">
+            <a>← Back Home</a>
+          </Link>
+        )}
+        {pagination < 34 && <button onClick={nextPage}>→</button>}
       </div>
     </div>
   );
