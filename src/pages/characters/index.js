@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
+const API = "https://rickandmortyapi.com/api";
+
 const initialForm = {
   name: "",
   status: "",
@@ -10,15 +12,18 @@ const initialForm = {
   gender: "",
 };
 
-export default function Characters() {
+export default function Characters({ types, species }) {
   const [characters, setCharacters] = useState([]);
   const [pagination, setPagination] = useState(1);
   const [form, setForm] = useState(initialForm);
+  const [search, setSearch] = useState(0);
 
   useEffect(() => {
+    const { name, status, type, species, gender } = form;
+
     const getCharacters = async () => {
       const res = await fetch(
-        `https://rickandmortyapi.com/api/character/?page=${pagination}`
+        `https://rickandmortyapi.com/api/character/?page=${pagination}&name=${name}&status=${status}&type=${type}&species=${species}&gender=${gender}`
       );
       const data = await res.json();
       data.results.forEach((character) => {
@@ -33,10 +38,10 @@ export default function Characters() {
     };
 
     getCharacters();
-  }, [pagination]);
+  }, [pagination, search]);
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    setForm({ ...form, [e.target.name]: e.target.value.trim() });
   };
 
   const nextPage = () => {
@@ -49,9 +54,36 @@ export default function Characters() {
     setPagination((prevPagination) => --prevPagination);
   };
 
+  const convertToLowerCase = (str) => {
+    return str.toLowerCase();
+  };
+
+  const getTagKey = (type) => {
+    const value = type.split(" ")[0];
+    if (value === "Human") {
+      if (type.split(" ")[2]) {
+        return convertToLowerCase(type.split(" ")[2]);
+      } else if (type.split(" ")[1]) {
+        return convertToLowerCase(type.split(" ")[1]);
+      } else {
+        return type.split(" ")[0];
+      }
+    } else if (value === "The") {
+      return convertToLowerCase(type.split(" ")[1]);
+    } else {
+      return convertToLowerCase(value);
+    }
+  };
+
+  const searchCharacters = (e) => {
+    e.preventDefault();
+    setCharacters([]);
+    setSearch((prevSearch) => ++prevSearch);
+  };
+
   return (
     <div>
-      <form>
+      <form onSubmit={searchCharacters}>
         <label>Name</label>
         <input
           type="text"
@@ -67,7 +99,34 @@ export default function Characters() {
           <option value="dead">Dead</option>
           <option value="unknow">Unknow</option>
         </select>
+        <label>Types</label>
+        <select name="type" onChange={handleChange}>
+          {types.map((type, index) => (
+            <option value={getTagKey(type)} key={index}>
+              {type}
+            </option>
+          ))}
+        </select>
+        <label>Species</label>
+        <select name="species" onChange={handleChange}>
+          <option value=""></option>
+          {species.map((specie, index) => (
+            <option value={getTagKey(specie)} key={index}>
+              {specie}
+            </option>
+          ))}
+        </select>
+
+        <label>Gender</label>
+        <select name="gender" onChange={handleChange}>
+          <option value="unknow">Unknow</option>
+          <option value="female">Female</option>
+          <option value="male">Male</option>
+          <option value="genderless">Genderless</option>
+        </select>
+        <input type="submit" value="Search" />
       </form>
+
       {characters.map(({ id, name, img, status }) => (
         <div key={id}>
           <Image src={img} alt={name} width={200} height={200} />
@@ -91,4 +150,49 @@ export default function Characters() {
       </div>
     </div>
   );
+}
+
+const deleteDuplicate = (arr) => {
+  return arr.filter((value, index) => {
+    return arr.indexOf(value) === index;
+  });
+};
+
+export async function getStaticProps() {
+  const res = await fetch(`${API}/character`);
+  const data = await res.json();
+  const pages = Array.from({ length: data.info.pages }, (v, i) => i + 1);
+
+  const newRes = await Promise.all(
+    pages.map((page) => {
+      const resCharacters = fetch(`${API}/character/?page=${page}`);
+
+      return resCharacters;
+    })
+  );
+
+  console.log(newRes);
+
+  const characters = await Promise.all(
+    newRes.map((character) => {
+      return character.json();
+    })
+  );
+
+  const allTypes = characters
+    .map((el) => el.results.map((character) => character.type))
+    .flat();
+
+  const allSpecies = characters
+    .map((el) => el.results.map((character) => character.species))
+    .flat();
+
+  const types = deleteDuplicate(allTypes);
+  const species = deleteDuplicate(allSpecies);
+
+  console.log(types);
+  console.log(species);
+  return {
+    props: { types, species },
+  };
 }
