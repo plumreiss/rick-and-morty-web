@@ -23,7 +23,7 @@ export default function Characters({ types, species }) {
 
     const getCharacters = async () => {
       const res = await fetch(
-        `https://rickandmortyapi.com/api/character/?page=${pagination}&name=${name}&status=${status}&type=${type}&species=${species}&gender=${gender}`
+        `${API}/character/?page=${pagination}&name=${name}&status=${status}&type=${type}&species=${species}&gender=${gender}`
       );
       const data = await res.json();
       data.results.forEach((character) => {
@@ -58,21 +58,10 @@ export default function Characters({ types, species }) {
     return str.toLowerCase();
   };
 
-  const getTagKey = (type) => {
-    const value = type.split(" ")[0];
-    if (value === "Human") {
-      if (type.split(" ")[2]) {
-        return convertToLowerCase(type.split(" ")[2]);
-      } else if (type.split(" ")[1]) {
-        return convertToLowerCase(type.split(" ")[1]);
-      } else {
-        return type.split(" ")[0];
-      }
-    } else if (value === "The") {
-      return convertToLowerCase(type.split(" ")[1]);
-    } else {
-      return convertToLowerCase(value);
-    }
+  const getTagKey = (str) => {
+    const tagKey = convertToLowerCase(str.replace(/\s+/g, "%20"));
+    console.log(tagKey);
+    return tagKey;
   };
 
   const searchCharacters = (e) => {
