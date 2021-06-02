@@ -14,6 +14,7 @@ const initialForm = {
 
 export default function Characters({ types, species }) {
   const [characters, setCharacters] = useState([]);
+  const [pages, setPages] = useState(0);
   const [pagination, setPagination] = useState(1);
   const [form, setForm] = useState(initialForm);
   const [search, setSearch] = useState(0);
@@ -26,6 +27,7 @@ export default function Characters({ types, species }) {
         `${API}/character/?page=${pagination}&name=${name}&status=${status}&type=${type}&species=${species}&gender=${gender}`
       );
       const data = await res.json();
+      setPages(data.info.pages);
       data.results.forEach((character) => {
         const newCharacter = {
           id: character.id,
@@ -60,7 +62,6 @@ export default function Characters({ types, species }) {
 
   const getTagKey = (str) => {
     const tagKey = convertToLowerCase(str.replace(/\s+/g, "%20"));
-    console.log(tagKey);
     return tagKey;
   };
 
@@ -83,7 +84,7 @@ export default function Characters({ types, species }) {
         />
         <label>Status</label>
         <select name="status" onChange={handleChange} defaultValue="">
-          <option value="">---</option>
+          <option value=""></option>
           <option value="alive">Alive</option>
           <option value="dead">Dead</option>
           <option value="unknow">Unknow</option>
@@ -108,6 +109,7 @@ export default function Characters({ types, species }) {
 
         <label>Gender</label>
         <select name="gender" onChange={handleChange}>
+          <option value=""></option>
           <option value="unknow">Unknow</option>
           <option value="female">Female</option>
           <option value="male">Male</option>
@@ -135,7 +137,7 @@ export default function Characters({ types, species }) {
             <a>← Back Home</a>
           </Link>
         )}
-        {pagination < 34 && <button onClick={nextPage}>→</button>}
+        {pagination < pages && <button onClick={nextPage}>→</button>}
       </div>
     </div>
   );
@@ -160,8 +162,6 @@ export async function getStaticProps() {
     })
   );
 
-  console.log(newRes);
-
   const characters = await Promise.all(
     newRes.map((character) => {
       return character.json();
@@ -179,8 +179,6 @@ export async function getStaticProps() {
   const types = deleteDuplicate(allTypes);
   const species = deleteDuplicate(allSpecies);
 
-  console.log(types);
-  console.log(species);
   return {
     props: { types, species },
   };
