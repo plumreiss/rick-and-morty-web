@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import Image from "next/image";
 import Link from "next/link";
+import { Character } from "../../components/Character";
 
 const API = "https://rickandmortyapi.com/api";
 
@@ -28,15 +28,37 @@ export default function Characters({ types, species }) {
       );
       const data = await res.json();
       setPages(data.info.pages);
-      data.results.forEach((character) => {
-        const newCharacter = {
-          id: character.id,
-          name: character.name,
-          img: character.image,
-          status: character.status,
-        };
-        setCharacters((prevCharacters) => [...prevCharacters, newCharacter]);
-      });
+      data.results.forEach(
+        async ({ id, name, image, status, species, location, episode }) => {
+          const firstEpisode = episode[0];
+
+          const episodeId = firstEpisode.substr(
+            firstEpisode.lastIndexOf("/") + 1
+          );
+          const resEpisode = await fetch(firstEpisode);
+          const episodeJson = await resEpisode.json();
+          const episodeName = episodeJson.name;
+
+          const locationName = location.name;
+          const urlLocation = location.url;
+          const locationId = urlLocation.substr(
+            urlLocation.lastIndexOf("/") + 1
+          );
+
+          const newCharacter = {
+            id,
+            name,
+            image,
+            status,
+            species,
+            locationName,
+            locationId,
+            episodeId,
+            episodeName,
+          };
+          setCharacters((prevCharacters) => [...prevCharacters, newCharacter]);
+        }
+      );
     };
 
     getCharacters();
@@ -118,16 +140,32 @@ export default function Characters({ types, species }) {
         <input type="submit" value="Search" />
       </form>
 
-      {characters.map(({ id, name, img, status }) => (
-        <div key={id}>
-          <Image src={img} alt={name} width={200} height={200} />
-          <h2>{name}</h2>
-          <h2>{status}</h2>
-          <Link href={`characters/${id}`}>
-            <a>View Information</a>
-          </Link>
-        </div>
-      ))}
+      {characters.map(
+        ({
+          id,
+          name,
+          status,
+          species,
+          image,
+          locationName,
+          locationId,
+          episodeId,
+          episodeName,
+        }) => (
+          <Character
+            key={id}
+            id={id}
+            name={name}
+            status={status}
+            species={species}
+            image={image}
+            locationName={locationName}
+            locationId={locationId}
+            episodeId={episodeId}
+            episodeName={episodeName}
+          />
+        )
+      )}
 
       <div>
         {pagination > 1 ? (
