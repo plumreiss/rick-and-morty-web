@@ -15,7 +15,7 @@ export function Character({
   return (
     <article>
       <div>
-        <Image src={image} width={200} height={200} />
+        <Image src={image} alt={name} width={200} height={200} />
       </div>
       <div>
         <div>
