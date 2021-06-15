@@ -1,22 +1,31 @@
-import Image from "next/image";
+import { Character } from "../../components/Character";
 
-export default function Character({ character }) {
+export default function CharacterPage({ characterProps }) {
+  const {
+    id,
+    name,
+    image,
+    status,
+    species,
+    locationName,
+    locationId,
+    episodeId,
+    episodeName,
+  } = characterProps;
+
   return (
     <div>
-      <Image
-        src={character.image}
-        width={200}
-        height={200}
-        alt={character.name}
-      />
-      <div>
-        <p>{character.name}</p>
-        <p>{character.status}</p>
-        <p>{character.species}</p>
-        <p>{character.gender}</p>
-        <p>{character.origin.name}</p>
-        <p>{character.location.name}</p>
-      </div>
+      <Character
+        id={id}
+        name={name}
+        status={status}
+        species={species}
+        image={image}
+        locationName={locationName}
+        locationId={locationId}
+        episodeId={episodeId}
+        episodeName={episodeName}
+      ></Character>
     </div>
   );
 }
@@ -26,28 +35,15 @@ export async function getStaticPaths() {
 
   const res = await fetch(`${API}/character`);
   const data = await res.json();
-  const pages = Array.from({ length: data.info.pages }, (v, i) => i + 1);
-
-  const pagesRes = await Promise.all(
-    pages.map((page) => {
-      const resCharacters = fetch(`${API}/character/?page=${page}`);
-      return resCharacters;
-    })
+  const numberCharacters = data.info.count;
+  const charactersId = Array.from(
+    { length: numberCharacters },
+    (v, i) => i + 1
   );
 
-  const characters = await Promise.all(
-    pagesRes.map((pageCharacters) => {
-      return pageCharacters.json();
-    })
-  );
-
-  const charactersID = characters.map((charactersPage) =>
-    charactersPage.results.map((character) => character.id)
-  );
-
-  const paths = charactersID.flat().map((characterID) => {
+  const paths = charactersId.map((characterId) => {
     return {
-      params: { id: `${characterID}` },
+      params: { id: `${characterId}` },
     };
   });
 
@@ -61,11 +57,33 @@ export async function getStaticProps({ params }) {
   const res = await fetch(
     `https://rickandmortyapi.com/api/character/${params.id}`
   );
-  const character = await res.json();
+  const characterJson = await res.json();
+
+  const firstEpisode = characterJson.episode[0];
+  const episodeId = firstEpisode.substr(firstEpisode.lastIndexOf("/") + 1);
+  const resEpisode = await fetch(firstEpisode);
+  const episodeJson = await resEpisode.json();
+  const episodeName = episodeJson.name;
+
+  const locationName = characterJson.location.name;
+  const urlLocation = characterJson.location.url;
+  const locationId = urlLocation.substr(urlLocation.lastIndexOf("/") + 1);
+
+  const characterProps = {
+    id: characterJson.id,
+    name: characterJson.name,
+    status: characterJson.status,
+    species: characterJson.species,
+    image: characterJson.image,
+    locationName,
+    locationId,
+    episodeId,
+    episodeName,
+  };
 
   return {
     props: {
-      character,
+      characterProps,
     },
   };
 }

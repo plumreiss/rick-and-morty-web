@@ -1,5 +1,4 @@
-import Image from "next/image";
-import Link from "next/link";
+import { Character } from "../../components/Character";
 
 const API = "https://rickandmortyapi.com/api";
 
@@ -15,19 +14,32 @@ export default function Location({ location, residents }) {
       </div>
 
       <h2>Residents</h2>
-      {residents.map(({ id, name, status, image }) => (
-        <div key={id}>
-          <Image src={image} width={200} height={200} />
-          <h2>{name}</h2>
-          <p>{status}</p>
-          <Link
-            href={`
-          /characters/${id}`}
-          >
-            <a>View information</a>
-          </Link>
-        </div>
-      ))}
+      {residents.map(
+        ({
+          id,
+          name,
+          status,
+          species,
+          image,
+          locationName,
+          locationId,
+          episodeId,
+          episodeName,
+        }) => (
+          <Character
+            key={id}
+            id={id}
+            name={name}
+            status={status}
+            species={species}
+            image={image}
+            locationName={locationName}
+            locationId={locationId}
+            episodeId={episodeId}
+            episodeName={episodeName}
+          />
+        )
+      )}
     </div>
   );
 }
@@ -35,23 +47,11 @@ export default function Location({ location, residents }) {
 export async function getStaticPaths() {
   const res = await fetch(`${API}/location`);
   const data = await res.json();
-  const pages = Array.from({ length: data.info.pages }, (v, i) => i + 1);
+  const locationsId = Array.from({ length: data.info.count }, (v, i) => i + 1);
 
-  const pagesRes = await Promise.all(
-    pages.map((page) => fetch(`${API}/location/?page=${page}`))
-  );
-
-  const locationsPage = await Promise.all(
-    pagesRes.map((location) => location.json())
-  );
-
-  const locationsID = locationsPage.map((locationPage) =>
-    locationPage.results.map((location) => location.id)
-  );
-
-  const paths = locationsID.flat().map((locationID) => {
+  const paths = locationsId.map((locationId) => {
     return {
-      params: { id: `${locationID}` },
+      params: { id: `${locationId}` },
     };
   });
 
@@ -71,8 +71,34 @@ export async function getStaticProps({ params }) {
     })
   );
 
-  const residents = await Promise.all(
+  const residentsData = await Promise.all(
     residentsRes.map((resident) => resident.json())
+  );
+
+  const residents = await Promise.all(
+    residentsData.map(async (character) => {
+      const firstEpisode = character.episode[0];
+
+      const episodeId = firstEpisode.substr(firstEpisode.lastIndexOf("/") + 1);
+      const resEpisode = await fetch(firstEpisode);
+      const episodeJson = await resEpisode.json();
+      const episodeName = episodeJson.name;
+
+      const locationName = character.location.name;
+      const urlLocation = character.location.url;
+      const locationId = urlLocation.substr(urlLocation.lastIndexOf("/") + 1);
+      return {
+        id: character.id,
+        name: character.name,
+        status: character.status,
+        species: character.species,
+        image: character.image,
+        locationName,
+        locationId,
+        episodeId,
+        episodeName,
+      };
+    })
   );
 
   return {
