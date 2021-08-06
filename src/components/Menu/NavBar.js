@@ -3,16 +3,19 @@ import styled from "styled-components";
 
 const ContainerNavBar = styled.header`
   width: 100%;
-  height: 70px;
+  height: 60px;
   background-color: #fff;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid rgb(51, 51, 51);
+
+  @media (max-width: 500px) {
+    flex-direction: column;
+  }
 `;
 
 const Title = styled.h1`
-  color: rgb(32, 35, 41);
+  color: rgb(51, 51, 51);
   cursor: pointer;
   transition: 0.2s ease-out;
 
@@ -23,7 +26,7 @@ const Title = styled.h1`
 
 const ContainerNav = styled.nav`
   a {
-    margin-right: 10px;
+    margin-right: 12px;
     text-decoration: none;
     color: rgb(51, 51, 51);
     font-weight: 700;
