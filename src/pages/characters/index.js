@@ -1,8 +1,20 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import styled from "styled-components";
 import { Character } from "../../components/Character";
 
 const API = "https://rickandmortyapi.com/api";
+
+const ContainerCharacters = styled.main`
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 3.5rem 0;
+
+  article {
+    margin-top: 1.3rem;
+  }
+`;
 
 const initialForm = {
   name: "",
@@ -140,32 +152,34 @@ export default function Characters({ types, species }) {
         <input type="submit" value="Search" />
       </form>
 
-      {characters.map(
-        ({
-          id,
-          name,
-          status,
-          species,
-          image,
-          locationName,
-          locationId,
-          episodeId,
-          episodeName,
-        }) => (
-          <Character
-            key={id}
-            id={id}
-            name={name}
-            status={status}
-            species={species}
-            image={image}
-            locationName={locationName}
-            locationId={locationId}
-            episodeId={episodeId}
-            episodeName={episodeName}
-          />
-        )
-      )}
+      <ContainerCharacters>
+        {characters.map(
+          ({
+            id,
+            name,
+            status,
+            species,
+            image,
+            locationName,
+            locationId,
+            episodeId,
+            episodeName,
+          }) => (
+            <Character
+              key={id}
+              id={id}
+              name={name}
+              status={status}
+              species={species}
+              image={image}
+              locationName={locationName}
+              locationId={locationId}
+              episodeId={episodeId}
+              episodeName={episodeName}
+            />
+          )
+        )}
+      </ContainerCharacters>
 
       <div>
         {pagination > 1 ? (
