@@ -8,6 +8,12 @@ const CardContainer = styled.article`
   width: 600px;
   border-radius: 0.7rem;
   background-color: rgb(60, 62, 68, 1);
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    height: initial;
+    width: 220px;
+  }
 `;
 
 const ContainerInformation = styled.div`
