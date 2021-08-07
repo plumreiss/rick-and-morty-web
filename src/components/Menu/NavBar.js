@@ -4,9 +4,9 @@ import styled from "styled-components";
 const ContainerNavBar = styled.header`
   width: 100%;
   height: 60px;
-  background-color: #fff;
+  background-color: #f4f4f4;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
 
   @media (max-width: 500px) {
