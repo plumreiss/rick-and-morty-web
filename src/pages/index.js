@@ -1,6 +1,18 @@
 import { TitleMain } from "../components/TitleMain/TitleMain";
 import { Character } from "../components/Character";
 import { useState, useEffect } from "react";
+import styled from "styled-components";
+
+const ContainerCharacters = styled.main`
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 3.5rem 0;
+
+  article {
+    margin-top: 1.3rem;
+  }
+`;
 
 const API = "https://rickandmortyapi.com/api";
 
@@ -66,7 +78,7 @@ export default function Main() {
   return (
     <>
       <TitleMain title="Ricknedy" />
-      <div>
+      <ContainerCharacters>
         {characters.map(
           ({
             id,
@@ -93,7 +105,7 @@ export default function Main() {
             />
           )
         )}
-      </div>
+      </ContainerCharacters>
     </>
   );
 }

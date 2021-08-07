@@ -1,5 +1,64 @@
 import Image from "next/image";
 import Link from "next/link";
+import styled from "styled-components";
+
+const CardContainer = styled.article`
+  display: flex;
+  height: 220px;
+  width: 600px;
+  border-radius: 0.7rem;
+  background-color: rgb(60, 62, 68, 1);
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    height: initial;
+    width: 220px;
+  }
+`;
+
+const ContainerInformation = styled.div`
+  flex: 3 1 0%;
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const ContainerImg = styled.div`
+  flex: 2 1 0%;
+  width: 100%;
+`;
+
+const NameCharacter = styled.a`
+  h2 {
+    font-size: 1.5rem;
+    color: #f4f4f4;
+    margin: 0;
+    transition: 0.2s ease-out;
+
+    &:hover {
+      color: orange;
+      cursor: pointer;
+    }
+  }
+`;
+
+const SubtitleInfo = styled.span`
+  color: rgb(158, 158, 158);
+`;
+
+const InfoLink = styled.a`
+  color: #f4f4f4;
+
+  &:hover {
+    color: orange;
+  }
+`;
 
 export function Character({
   id,
@@ -13,34 +72,34 @@ export function Character({
   episodeName,
 }) {
   return (
-    <article>
-      <div>
-        <Image src={image} alt={name} width={200} height={200} />
-      </div>
-      <div>
-        <div>
+    <CardContainer>
+      <ContainerImg>
+        <Image src={image} alt={name} width="220" height="220" />
+      </ContainerImg>
+      <ContainerInformation>
+        <Container>
           <Link href={`/characters/${id}`}>
-            <a>
+            <NameCharacter>
               <h2>{name}</h2>
-            </a>
+            </NameCharacter>
           </Link>
-          <span>
+          <SubtitleInfo>
             {status} - {species}
-          </span>
-        </div>
-        <div>
-          <span>Last known location:</span>
+          </SubtitleInfo>
+        </Container>
+        <Container>
+          <SubtitleInfo>Last known location:</SubtitleInfo>
           <Link href={`/locations/${locationId}`}>
-            <a>{locationName}</a>
+            <InfoLink>{locationName}</InfoLink>
           </Link>
-        </div>
-        <div>
-          <span>First seen in:</span>
+        </Container>
+        <Container>
+          <SubtitleInfo>First seen in:</SubtitleInfo>
           <Link href={`/episodes/${episodeId}`}>
-            <a>{episodeName}</a>
+            <InfoLink>{episodeName}</InfoLink>
           </Link>
-        </div>
-      </div>
-    </article>
+        </Container>
+      </ContainerInformation>
+    </CardContainer>
   );
 }
