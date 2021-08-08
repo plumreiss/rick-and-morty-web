@@ -57,6 +57,7 @@ const InfoLink = styled.a`
 
   &:hover {
     color: orange;
+    cursor: pointer;
   }
 `;
 
