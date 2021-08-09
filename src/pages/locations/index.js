@@ -1,17 +1,16 @@
-import Link from "next/link";
+import { LocationCard } from "../../components/LocationCard";
 
 export default function Locations({ locations }) {
   return (
     <div>
       {locations.map(({ id, name, type, dimension }) => (
-        <div key={id}>
-          <h2>{name}</h2>
-          <p>{type}</p>
-          <p>{dimension}</p>
-          <Link href={`locations/${id}`}>
-            <a>View residents</a>
-          </Link>
-        </div>
+        <LocationCard
+          key={id}
+          id={id}
+          name={name}
+          type={type}
+          dimension={dimension}
+        />
       ))}
     </div>
   );
