@@ -1,17 +1,14 @@
 import { Character } from "../../components/Character";
+import { LocationCard } from "../../components/LocationCard";
 
 const API = "https://rickandmortyapi.com/api";
 
 export default function Location({ location, residents }) {
-  const { name, type, dimension } = location;
+  const { id, name, type, dimension } = location;
 
   return (
     <div>
-      <div>
-        <h2>{name}</h2>
-        <p>{type}</p>
-        <p>{dimension}</p>
-      </div>
+      <LocationCard id={id} name={name} type={type} dimension={dimension} />
 
       <h2>Residents</h2>
       {residents.map(
