@@ -1,8 +1,20 @@
 import { LocationCard } from "../../components/LocationCard";
+import styled from "styled-components";
+
+const ContainerElements = styled.main`
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 3.5rem 0;
+
+  article {
+    margin-top: 1.3rem;
+  }
+`;
 
 export default function Locations({ locations }) {
   return (
-    <div>
+    <ContainerElements>
       {locations.map(({ id, name, type, dimension }) => (
         <LocationCard
           key={id}
@@ -12,7 +24,7 @@ export default function Locations({ locations }) {
           dimension={dimension}
         />
       ))}
-    </div>
+    </ContainerElements>
   );
 }
 
