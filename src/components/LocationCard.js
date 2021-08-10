@@ -1,7 +1,7 @@
 import Link from "next/link";
 import styled from "styled-components";
 
-const CardLocation = styled.section`
+const CardLocation = styled.article`
   display: flex;
   width: 220px;
   height: 300px;
