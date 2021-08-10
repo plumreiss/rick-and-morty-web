@@ -1,15 +1,14 @@
 import { Character } from "../../components/Character";
+import { EpisodeCard } from "../../components/EpisodeCard";
 
 const API = "https://rickandmortyapi.com/api";
 export default function episode({ _episode, characters }) {
-  const { name, air_date, episode } = _episode;
+  const { id, name, air_date, episode } = _episode;
 
   return (
     <div>
-      <h2>{name}</h2>
-      <p>{episode}</p>
-      <p>{air_date}</p>
-      <h2>Characters that appear in {episode}</h2>
+      <EpisodeCard id={id} name={name} air_date={air_date} episode={episode} />
+
       {characters.map(
         ({
           id,

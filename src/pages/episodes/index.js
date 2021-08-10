@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { EpisodeCard } from "../../components/EpisodeCard";
 
 const API = "https://rickandmortyapi.com/api";
 
@@ -6,14 +6,13 @@ export default function Episodes({ episodes }) {
   return (
     <div>
       {episodes.map(({ id, name, air_date, episode }) => (
-        <div key={id}>
-          <h2>{name}</h2>
-          <p>{air_date}</p>
-          <p>{episode}</p>
-          <Link href={`/episodes/${id}`}>
-            <a>View characters</a>
-          </Link>
-        </div>
+        <EpisodeCard
+          key={id}
+          id={id}
+          name={name}
+          air_date={air_date}
+          episode={episode}
+        />
       ))}
     </div>
   );
