@@ -1,43 +1,65 @@
 import { Character } from "../../components/Character";
 import { LocationCard } from "../../components/LocationCard";
+import styled from "styled-components";
 
 const API = "https://rickandmortyapi.com/api";
+
+const ContainerCards = styled.main`
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 3.5rem 0;
+
+  article {
+    margin-top: 1.3rem;
+  }
+
+  h2 {
+    text-align: center;
+    color: #f4f4f4;
+  }
+`;
 
 export default function Location({ location, residents }) {
   const { id, name, type, dimension } = location;
 
   return (
-    <div>
-      <LocationCard id={id} name={name} type={type} dimension={dimension} />
-
-      <h2>Residents</h2>
-      {residents.map(
-        ({
-          id,
-          name,
-          status,
-          species,
-          image,
-          locationName,
-          locationId,
-          episodeId,
-          episodeName,
-        }) => (
-          <Character
-            key={id}
-            id={id}
-            name={name}
-            status={status}
-            species={species}
-            image={image}
-            locationName={locationName}
-            locationId={locationId}
-            episodeId={episodeId}
-            episodeName={episodeName}
-          />
-        )
-      )}
-    </div>
+    <>
+      <ContainerCards>
+        <LocationCard id={id} name={name} type={type} dimension={dimension} />
+      </ContainerCards>
+      <ContainerCards>
+        <h2>Residents</h2>
+      </ContainerCards>
+      <ContainerCards>
+        {residents.map(
+          ({
+            id,
+            name,
+            status,
+            species,
+            image,
+            locationName,
+            locationId,
+            episodeId,
+            episodeName,
+          }) => (
+            <Character
+              key={id}
+              id={id}
+              name={name}
+              status={status}
+              species={species}
+              image={image}
+              locationName={locationName}
+              locationId={locationId}
+              episodeId={episodeId}
+              episodeName={episodeName}
+            />
+          )
+        )}
+      </ContainerCards>
+    </>
   );
 }
 

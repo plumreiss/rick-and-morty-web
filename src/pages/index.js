@@ -3,7 +3,7 @@ import { Character } from "../components/Character";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 
-const ContainerCharacters = styled.main`
+const ContainerCards = styled.main`
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
@@ -78,7 +78,7 @@ export default function Main() {
   return (
     <>
       <TitleMain title="Ricknedy" />
-      <ContainerCharacters>
+      <ContainerCards>
         {characters.map(
           ({
             id,
@@ -105,7 +105,7 @@ export default function Main() {
             />
           )
         )}
-      </ContainerCharacters>
+      </ContainerCards>
     </>
   );
 }

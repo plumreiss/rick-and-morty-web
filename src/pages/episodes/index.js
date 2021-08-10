@@ -1,10 +1,22 @@
 import { EpisodeCard } from "../../components/EpisodeCard";
+import styled from "styled-components";
 
 const API = "https://rickandmortyapi.com/api";
 
+const ContainerCards = styled.main`
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 3.5rem 0;
+
+  article {
+    margin-top: 1.3rem;
+  }
+`;
+
 export default function Episodes({ episodes }) {
   return (
-    <div>
+    <ContainerCards>
       {episodes.map(({ id, name, air_date, episode }) => (
         <EpisodeCard
           key={id}
@@ -14,7 +26,7 @@ export default function Episodes({ episodes }) {
           episode={episode}
         />
       ))}
-    </div>
+    </ContainerCards>
   );
 }
 
