@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import styled from "styled-components";
 import { Character } from "../../components/Character";
+import { Form } from "../../components/Form/Form";
 
 const API = "https://rickandmortyapi.com/api";
 
@@ -107,7 +108,7 @@ export default function Characters({ types, species }) {
 
   return (
     <div>
-      <form onSubmit={searchCharacters}>
+      <Form handleSubmit={searchCharacters}>
         <label>Name</label>
         <input
           type="text"
@@ -150,7 +151,7 @@ export default function Characters({ types, species }) {
           <option value="genderless">Genderless</option>
         </select>
         <input type="submit" value="Search" />
-      </form>
+      </Form>
 
       <ContainerCharacters>
         {characters.map(
