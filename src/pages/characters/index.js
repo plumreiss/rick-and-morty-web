@@ -2,6 +2,11 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import styled from "styled-components";
 import { Character } from "../../components/Character";
+import { Form } from "../../components/Form/Form";
+import { Input } from "../../components/Form/Input";
+import { Label } from "../../components/Form/Label";
+import { Select } from "../../components/Form/Select";
+import { Option } from "../../components/Form/Option";
 
 const API = "https://rickandmortyapi.com/api";
 
@@ -107,50 +112,60 @@ export default function Characters({ types, species }) {
 
   return (
     <div>
-      <form onSubmit={searchCharacters}>
-        <label>Name</label>
-        <input
-          type="text"
-          name="name"
-          placeholder="Name"
-          onChange={handleChange}
-          value={form.name}
+      <Form handleSubmit={searchCharacters}>
+        <Label labelName="Name" />
+        <Input
+          inputType="text"
+          inputName="name"
+          inputPlaceholder="Name"
+          handleChange={handleChange}
+          inputValue={form.name}
         />
-        <label>Status</label>
-        <select name="status" onChange={handleChange} defaultValue="">
-          <option value=""></option>
-          <option value="alive">Alive</option>
-          <option value="dead">Dead</option>
-          <option value="unknow">Unknow</option>
-        </select>
-        <label>Types</label>
-        <select name="type" onChange={handleChange}>
-          {types.map((type, index) => (
-            <option value={getTagKey(type)} key={index}>
-              {type}
-            </option>
-          ))}
-        </select>
-        <label>Species</label>
-        <select name="species" onChange={handleChange}>
-          <option value=""></option>
-          {species.map((specie, index) => (
-            <option value={getTagKey(specie)} key={index}>
-              {specie}
-            </option>
-          ))}
-        </select>
 
-        <label>Gender</label>
-        <select name="gender" onChange={handleChange}>
-          <option value=""></option>
-          <option value="unknow">Unknow</option>
-          <option value="female">Female</option>
-          <option value="male">Male</option>
-          <option value="genderless">Genderless</option>
-        </select>
-        <input type="submit" value="Search" />
-      </form>
+        <Label labelName="Status" />
+        <Select selectName="status" handleChange={handleChange} defaultValue="">
+          <Option optionValue="" nameValue="" />
+          <Option optionValue="alive" nameValue="Alive" />
+          <Option optionValue="dead" nameValue="Dead" />
+          <Option optionValue="unknow" nameValue="Unknow" />
+        </Select>
+
+        <Label labelName="Types" />
+        <Select selectName="type" handleChange={handleChange} defaultValue="">
+          {types.map((type, index) => (
+            <Option
+              key={index}
+              optionValue={getTagKey(type)}
+              nameValue={type}
+            />
+          ))}
+        </Select>
+        <Label labelName="Species" />
+        <Select
+          selectName="species"
+          handleChange={handleChange}
+          defaultValue=""
+        >
+          <Option optionValue="" nameValue="" />
+          {species.map((specie, index) => (
+            <Option
+              key={index}
+              optionValue={getTagKey(specie)}
+              nameValue={specie}
+            />
+          ))}
+        </Select>
+
+        <Label labelName="Gender" />
+        <Select selectName="gender" handleChange={handleChange} defaultValue="">
+          <Option optionValue="" nameValue="" />
+          <Option optionValue="unknow" nameValue="Unknow" />
+          <Option optionValue="female" nameValue="Female" />
+          <Option optionValue="male" nameValue="Male" />
+          <Option optionValue="genderless" nameValue="Genderless" />
+        </Select>
+        <Input inputType="submit" inputValue="Search" />
+      </Form>
 
       <ContainerCharacters>
         {characters.map(
