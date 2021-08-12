@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { Character } from "../../components/Character";
 import { Form } from "../../components/Form/Form";
 import { Input } from "../../components/Form/Input";
+import { Label } from "../../components/Form/Label";
 
 const API = "https://rickandmortyapi.com/api";
 
@@ -110,7 +111,7 @@ export default function Characters({ types, species }) {
   return (
     <div>
       <Form handleSubmit={searchCharacters}>
-        <label>Name</label>
+        <Label labelName="Name" />
         <Input
           inputType="text"
           inputName="name"
@@ -119,14 +120,14 @@ export default function Characters({ types, species }) {
           inputValue={form.name}
         />
 
-        <label>Status</label>
+        <Label labelName="Status" />
         <select name="status" onChange={handleChange} defaultValue="">
           <option value=""></option>
           <option value="alive">Alive</option>
           <option value="dead">Dead</option>
           <option value="unknow">Unknow</option>
         </select>
-        <label>Types</label>
+        <Label labelName="Types" />
         <select name="type" onChange={handleChange}>
           {types.map((type, index) => (
             <option value={getTagKey(type)} key={index}>
@@ -134,7 +135,7 @@ export default function Characters({ types, species }) {
             </option>
           ))}
         </select>
-        <label>Species</label>
+        <Label labelName="Species" />
         <select name="species" onChange={handleChange}>
           <option value=""></option>
           {species.map((specie, index) => (
@@ -144,7 +145,7 @@ export default function Characters({ types, species }) {
           ))}
         </select>
 
-        <label>Gender</label>
+        <Label labelName="Gender" />
         <select name="gender" onChange={handleChange}>
           <option value=""></option>
           <option value="unknow">Unknow</option>
@@ -153,6 +154,7 @@ export default function Characters({ types, species }) {
           <option value="genderless">Genderless</option>
         </select>
         <Input inputType="submit" inputValue="Search" />
+        <Label labelName="testing" />
       </Form>
 
       <ContainerCharacters>
