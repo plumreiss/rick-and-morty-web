@@ -5,6 +5,8 @@ import { Character } from "../../components/Character";
 import { Form } from "../../components/Form/Form";
 import { Input } from "../../components/Form/Input";
 import { Label } from "../../components/Form/Label";
+import { Select } from "../../components/Form/Select";
+import { Option } from "../../components/Form/Option";
 
 const API = "https://rickandmortyapi.com/api";
 
@@ -121,40 +123,48 @@ export default function Characters({ types, species }) {
         />
 
         <Label labelName="Status" />
-        <select name="status" onChange={handleChange} defaultValue="">
-          <option value=""></option>
-          <option value="alive">Alive</option>
-          <option value="dead">Dead</option>
-          <option value="unknow">Unknow</option>
-        </select>
+        <Select selectName="status" handleChange={handleChange} defaultValue="">
+          <Option optionValue="" nameValue="" />
+          <Option optionValue="alive" nameValue="Alive" />
+          <Option optionValue="dead" nameValue="Dead" />
+          <Option optionValue="unknow" nameValue="Unknow" />
+        </Select>
+
         <Label labelName="Types" />
-        <select name="type" onChange={handleChange}>
+        <Select selectName="type" handleChange={handleChange} defaultValue="">
           {types.map((type, index) => (
-            <option value={getTagKey(type)} key={index}>
-              {type}
-            </option>
+            <Option
+              key={index}
+              optionValue={getTagKey(type)}
+              nameValue={type}
+            />
           ))}
-        </select>
+        </Select>
         <Label labelName="Species" />
-        <select name="species" onChange={handleChange}>
-          <option value=""></option>
+        <Select
+          selectName="species"
+          handleChange={handleChange}
+          defaultValue=""
+        >
+          <Option optionValue="" nameValue="" />
           {species.map((specie, index) => (
-            <option value={getTagKey(specie)} key={index}>
-              {specie}
-            </option>
+            <Option
+              key={index}
+              optionValue={getTagKey(specie)}
+              nameValue={specie}
+            />
           ))}
-        </select>
+        </Select>
 
         <Label labelName="Gender" />
-        <select name="gender" onChange={handleChange}>
-          <option value=""></option>
-          <option value="unknow">Unknow</option>
-          <option value="female">Female</option>
-          <option value="male">Male</option>
-          <option value="genderless">Genderless</option>
-        </select>
+        <Select selectName="gender" handleChange={handleChange} defaultValue="">
+          <Option optionValue="" nameValue="" />
+          <Option optionValue="unknow" nameValue="Unknow" />
+          <Option optionValue="female" nameValue="Female" />
+          <Option optionValue="male" nameValue="Male" />
+          <Option optionValue="genderless" nameValue="Genderless" />
+        </Select>
         <Input inputType="submit" inputValue="Search" />
-        <Label labelName="testing" />
       </Form>
 
       <ContainerCharacters>
