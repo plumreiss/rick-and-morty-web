@@ -3,6 +3,7 @@ import Link from "next/link";
 import styled from "styled-components";
 import { Character } from "../../components/Character";
 import { Form } from "../../components/Form/Form";
+import { Input } from "../../components/Form/Input";
 
 const API = "https://rickandmortyapi.com/api";
 
@@ -110,13 +111,14 @@ export default function Characters({ types, species }) {
     <div>
       <Form handleSubmit={searchCharacters}>
         <label>Name</label>
-        <input
-          type="text"
-          name="name"
-          placeholder="Name"
-          onChange={handleChange}
+        <Input
+          inputType="text"
+          inputName="Name"
+          inputPlaceholder="Name"
+          handleChange={handleChange}
           value={form.name}
         />
+
         <label>Status</label>
         <select name="status" onChange={handleChange} defaultValue="">
           <option value=""></option>
