@@ -113,10 +113,10 @@ export default function Characters({ types, species }) {
         <label>Name</label>
         <Input
           inputType="text"
-          inputName="Name"
+          inputName="name"
           inputPlaceholder="Name"
           handleChange={handleChange}
-          value={form.name}
+          inputValue={form.name}
         />
 
         <label>Status</label>

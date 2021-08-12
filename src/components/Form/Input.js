@@ -3,15 +3,16 @@ export function Input({
   inputName,
   inputPlaceholder,
   handleChange,
-  value,
+  inputValue,
 }) {
+  console.log(inputValue);
   return (
     <input
       type={inputType}
       name={inputName}
       placeholder={inputPlaceholder}
       onChange={handleChange}
-      value={value}
+      value={inputValue}
     />
   );
 }
