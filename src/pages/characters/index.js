@@ -152,7 +152,7 @@ export default function Characters({ types, species }) {
           <option value="male">Male</option>
           <option value="genderless">Genderless</option>
         </select>
-        <input type="submit" value="Search" />
+        <Input inputType="submit" inputValue="Search" />
       </Form>
 
       <ContainerCharacters>

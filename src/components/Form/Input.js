@@ -5,7 +5,6 @@ export function Input({
   handleChange,
   inputValue,
 }) {
-  console.log(inputValue);
   return (
     <input
       type={inputType}
