@@ -7,6 +7,8 @@ import { Input } from "../../components/Form/Input";
 import { Label } from "../../components/Form/Label";
 import { Select } from "../../components/Form/Select";
 import { Option } from "../../components/Form/Option";
+import { Modal } from "../../components/Modal/Modal";
+import { useModal } from "../../hooks/useModal";
 
 const API = "https://rickandmortyapi.com/api";
 
@@ -35,6 +37,7 @@ export default function Characters({ types, species }) {
   const [pagination, setPagination] = useState(1);
   const [form, setForm] = useState(initialForm);
   const [search, setSearch] = useState(0);
+  const { isOpen, openModal, closeModal } = useModal(false);
 
   useEffect(() => {
     const { name, status, type, species, gender } = form;
@@ -112,60 +115,71 @@ export default function Characters({ types, species }) {
 
   return (
     <div>
-      <Form handleSubmit={searchCharacters}>
-        <Label labelName="Name" />
-        <Input
-          inputType="text"
-          inputName="name"
-          inputPlaceholder="Name"
-          handleChange={handleChange}
-          inputValue={form.name}
-        />
+      <button onClick={openModal}>Filter</button>
+      <Modal isOpen={isOpen} closeModal={closeModal}>
+        <Form handleSubmit={searchCharacters}>
+          <Label labelName="Name" />
+          <Input
+            inputType="text"
+            inputName="name"
+            inputPlaceholder="Name"
+            handleChange={handleChange}
+            inputValue={form.name}
+          />
 
-        <Label labelName="Status" />
-        <Select selectName="status" handleChange={handleChange} defaultValue="">
-          <Option optionValue="" nameValue="" />
-          <Option optionValue="alive" nameValue="Alive" />
-          <Option optionValue="dead" nameValue="Dead" />
-          <Option optionValue="unknow" nameValue="Unknow" />
-        </Select>
+          <Label labelName="Status" />
+          <Select
+            selectName="status"
+            handleChange={handleChange}
+            defaultValue=""
+          >
+            <Option optionValue="" nameValue="" />
+            <Option optionValue="alive" nameValue="Alive" />
+            <Option optionValue="dead" nameValue="Dead" />
+            <Option optionValue="unknow" nameValue="Unknow" />
+          </Select>
 
-        <Label labelName="Types" />
-        <Select selectName="type" handleChange={handleChange} defaultValue="">
-          {types.map((type, index) => (
-            <Option
-              key={index}
-              optionValue={getTagKey(type)}
-              nameValue={type}
-            />
-          ))}
-        </Select>
-        <Label labelName="Species" />
-        <Select
-          selectName="species"
-          handleChange={handleChange}
-          defaultValue=""
-        >
-          <Option optionValue="" nameValue="" />
-          {species.map((specie, index) => (
-            <Option
-              key={index}
-              optionValue={getTagKey(specie)}
-              nameValue={specie}
-            />
-          ))}
-        </Select>
+          <Label labelName="Types" />
+          <Select selectName="type" handleChange={handleChange} defaultValue="">
+            {types.map((type, index) => (
+              <Option
+                key={index}
+                optionValue={getTagKey(type)}
+                nameValue={type}
+              />
+            ))}
+          </Select>
+          <Label labelName="Species" />
+          <Select
+            selectName="species"
+            handleChange={handleChange}
+            defaultValue=""
+          >
+            <Option optionValue="" nameValue="" />
+            {species.map((specie, index) => (
+              <Option
+                key={index}
+                optionValue={getTagKey(specie)}
+                nameValue={specie}
+              />
+            ))}
+          </Select>
 
-        <Label labelName="Gender" />
-        <Select selectName="gender" handleChange={handleChange} defaultValue="">
-          <Option optionValue="" nameValue="" />
-          <Option optionValue="unknow" nameValue="Unknow" />
-          <Option optionValue="female" nameValue="Female" />
-          <Option optionValue="male" nameValue="Male" />
-          <Option optionValue="genderless" nameValue="Genderless" />
-        </Select>
-        <Input inputType="submit" inputValue="Search" />
-      </Form>
+          <Label labelName="Gender" />
+          <Select
+            selectName="gender"
+            handleChange={handleChange}
+            defaultValue=""
+          >
+            <Option optionValue="" nameValue="" />
+            <Option optionValue="unknow" nameValue="Unknow" />
+            <Option optionValue="female" nameValue="Female" />
+            <Option optionValue="male" nameValue="Male" />
+            <Option optionValue="genderless" nameValue="Genderless" />
+          </Select>
+          <Input inputType="submit" inputValue="Search" />
+        </Form>
+      </Modal>
 
       <ContainerCharacters>
         {characters.map(
