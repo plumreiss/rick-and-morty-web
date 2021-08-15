@@ -118,65 +118,79 @@ export default function Characters({ types, species }) {
       <button onClick={openModal}>Filter</button>
       <Modal isOpen={isOpen} closeModal={closeModal}>
         <Form handleSubmit={searchCharacters}>
-          <Label labelName="Name" />
-          <Input
-            inputType="text"
-            inputName="name"
-            inputPlaceholder="Name"
-            handleChange={handleChange}
-            inputValue={form.name}
-          />
+          <div>
+            <Label labelName="Name" />
+            <Input
+              inputType="text"
+              inputName="name"
+              inputPlaceholder="Name"
+              handleChange={handleChange}
+              inputValue={form.name}
+            />
+          </div>
 
-          <Label labelName="Status" />
-          <Select
-            selectName="status"
-            handleChange={handleChange}
-            defaultValue=""
-          >
-            <Option optionValue="" nameValue="" />
-            <Option optionValue="alive" nameValue="Alive" />
-            <Option optionValue="dead" nameValue="Dead" />
-            <Option optionValue="unknow" nameValue="Unknow" />
-          </Select>
+          <div>
+            <Label labelName="Status" />
+            <Select
+              selectName="status"
+              handleChange={handleChange}
+              defaultValue=""
+            >
+              <Option optionValue="" nameValue="" />
+              <Option optionValue="alive" nameValue="Alive" />
+              <Option optionValue="dead" nameValue="Dead" />
+              <Option optionValue="unknow" nameValue="Unknow" />
+            </Select>
+          </div>
+          <div>
+            <Label labelName="Types" />
+            <Select
+              selectName="type"
+              handleChange={handleChange}
+              defaultValue=""
+            >
+              {types.map((type, index) => (
+                <Option
+                  key={index}
+                  optionValue={getTagKey(type)}
+                  nameValue={type}
+                />
+              ))}
+            </Select>
+          </div>
 
-          <Label labelName="Types" />
-          <Select selectName="type" handleChange={handleChange} defaultValue="">
-            {types.map((type, index) => (
-              <Option
-                key={index}
-                optionValue={getTagKey(type)}
-                nameValue={type}
-              />
-            ))}
-          </Select>
-          <Label labelName="Species" />
-          <Select
-            selectName="species"
-            handleChange={handleChange}
-            defaultValue=""
-          >
-            <Option optionValue="" nameValue="" />
-            {species.map((specie, index) => (
-              <Option
-                key={index}
-                optionValue={getTagKey(specie)}
-                nameValue={specie}
-              />
-            ))}
-          </Select>
+          <div>
+            <Label labelName="Species" />
+            <Select
+              selectName="species"
+              handleChange={handleChange}
+              defaultValue=""
+            >
+              <Option optionValue="" nameValue="" />
+              {species.map((specie, index) => (
+                <Option
+                  key={index}
+                  optionValue={getTagKey(specie)}
+                  nameValue={specie}
+                />
+              ))}
+            </Select>
+          </div>
 
-          <Label labelName="Gender" />
-          <Select
-            selectName="gender"
-            handleChange={handleChange}
-            defaultValue=""
-          >
-            <Option optionValue="" nameValue="" />
-            <Option optionValue="unknow" nameValue="Unknow" />
-            <Option optionValue="female" nameValue="Female" />
-            <Option optionValue="male" nameValue="Male" />
-            <Option optionValue="genderless" nameValue="Genderless" />
-          </Select>
+          <div>
+            <Label labelName="Gender" />
+            <Select
+              selectName="gender"
+              handleChange={handleChange}
+              defaultValue=""
+            >
+              <Option optionValue="" nameValue="" />
+              <Option optionValue="unknow" nameValue="Unknow" />
+              <Option optionValue="female" nameValue="Female" />
+              <Option optionValue="male" nameValue="Male" />
+              <Option optionValue="genderless" nameValue="Genderless" />
+            </Select>
+          </div>
           <Input inputType="submit" inputValue="Search" />
         </Form>
       </Modal>
