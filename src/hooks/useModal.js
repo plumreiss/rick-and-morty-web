@@ -1,5 +1,4 @@
-import { TooManyRequests } from "http-errors";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export function useModal(initialState) {
   const [isOpen, setIsOpen] = useState(initialState);
@@ -8,9 +7,20 @@ export function useModal(initialState) {
     setIsOpen(true);
   };
 
-  const closeModal = (e) => {
+  const closeModal = () => {
     setIsOpen(false);
   };
+
+  useEffect(() => {
+    const closeModalEsc = (e) => {
+      if (e.key === "Escape") {
+        closeModal();
+      }
+    };
+
+    window.addEventListener("keydown", closeModalEsc);
+    return () => window.removeEventListener("keydown", closeModalEsc);
+  }, []);
 
   return {
     isOpen,
