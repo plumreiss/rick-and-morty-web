@@ -6,7 +6,6 @@ const InputSelect = styled.select`
   border: none;
   border-radius: 4px;
   background-color: rgb(51, 51, 51);
-  box-sizing: border-box;
   color: #f4f4f4;
 `;
 
