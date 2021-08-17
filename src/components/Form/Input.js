@@ -1,3 +1,10 @@
+import styled from "styled-components";
+
+const InputForm = styled.input`
+  width: 100%;
+  padding: 12px 20px;
+`;
+
 export function Input({
   inputType,
   inputName,
@@ -6,7 +13,7 @@ export function Input({
   inputValue,
 }) {
   return (
-    <input
+    <InputForm
       type={inputType}
       name={inputName}
       placeholder={inputPlaceholder}
