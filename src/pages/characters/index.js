@@ -9,6 +9,7 @@ import { Select } from "../../components/Form/Select";
 import { Option } from "../../components/Form/Option";
 import { Modal } from "../../components/Modal/Modal";
 import { useModal } from "../../hooks/useModal";
+import { ContainerInputs } from "../../components/Form/ContainerInputs";
 
 const API = "https://rickandmortyapi.com/api";
 
@@ -118,8 +119,8 @@ export default function Characters({ types, species }) {
       <button onClick={openModal}>Filter</button>
       <Modal isOpen={isOpen} closeModal={closeModal}>
         <Form handleSubmit={searchCharacters}>
-          <div>
-            <Label labelName="Name" />
+          <ContainerInputs>
+            <Label labelName="Name:" />
             <Input
               inputType="text"
               inputName="name"
@@ -127,10 +128,10 @@ export default function Characters({ types, species }) {
               handleChange={handleChange}
               inputValue={form.name}
             />
-          </div>
+          </ContainerInputs>
 
-          <div>
-            <Label labelName="Status" />
+          <ContainerInputs>
+            <Label labelName="Status:" />
             <Select
               selectName="status"
               handleChange={handleChange}
@@ -141,9 +142,10 @@ export default function Characters({ types, species }) {
               <Option optionValue="dead" nameValue="Dead" />
               <Option optionValue="unknow" nameValue="Unknow" />
             </Select>
-          </div>
-          <div>
-            <Label labelName="Types" />
+          </ContainerInputs>
+
+          <ContainerInputs>
+            <Label labelName="Types:" />
             <Select
               selectName="type"
               handleChange={handleChange}
@@ -157,10 +159,10 @@ export default function Characters({ types, species }) {
                 />
               ))}
             </Select>
-          </div>
+          </ContainerInputs>
 
-          <div>
-            <Label labelName="Species" />
+          <ContainerInputs>
+            <Label labelName="Species:" />
             <Select
               selectName="species"
               handleChange={handleChange}
@@ -175,10 +177,10 @@ export default function Characters({ types, species }) {
                 />
               ))}
             </Select>
-          </div>
+          </ContainerInputs>
 
-          <div>
-            <Label labelName="Gender" />
+          <ContainerInputs>
+            <Label labelName="Gender:" />
             <Select
               selectName="gender"
               handleChange={handleChange}
@@ -190,7 +192,7 @@ export default function Characters({ types, species }) {
               <Option optionValue="male" nameValue="Male" />
               <Option optionValue="genderless" nameValue="Genderless" />
             </Select>
-          </div>
+          </ContainerInputs>
           <Input inputType="submit" inputValue="Search" />
         </Form>
       </Modal>
