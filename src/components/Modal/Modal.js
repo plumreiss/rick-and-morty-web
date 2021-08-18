@@ -17,7 +17,7 @@ const ModalContent = styled.div`
   position: relative;
   width: 80%;
   height: 80vh;
-  padding: 10px 20px;
+  padding: 20px;
   background-color: #f4f4f4;
 `;
 
