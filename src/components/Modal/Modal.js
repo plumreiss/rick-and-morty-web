@@ -19,6 +19,27 @@ const ModalContent = styled.div`
   height: 80vh;
   padding: 20px;
   background-color: #f4f4f4;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const ButtonCloseModal = styled.div`
+  align-self: flex-end;
+  text-align: center;
+  height: 24px;
+  width: 24px;
+  font-size: 17px;
+  font-weight: 600;
+  border-radius: 4px;
+  border: 1px solid #000;
+  cursor: pointer;
+
+  &:hover {
+    background: #f4f4f4;
+    color: orange;
+  }
 `;
 
 export function Modal({ children, isOpen, closeModal }) {
@@ -27,7 +48,7 @@ export function Modal({ children, isOpen, closeModal }) {
   return (
     <ModalContainer isOpen={isOpen} onClick={closeModal}>
       <ModalContent onClick={handleClick}>
-        <button onClick={closeModal}>X</button>
+        <ButtonCloseModal onClick={closeModal}>X</ButtonCloseModal>
         {children}
       </ModalContent>
     </ModalContainer>
