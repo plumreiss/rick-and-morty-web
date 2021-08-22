@@ -12,7 +12,7 @@ const CardContainer = styled.article`
 
   @media (max-width: 600px) {
     flex-direction: column;
-    height: initial;
+    height: 600px;
     width: 220px;
   }
 `;
@@ -33,10 +33,17 @@ const Container = styled.div`
 const ContainerImg = styled.div`
   flex: 2 1 0%;
   width: 100%;
+  height: 100%;
   position: relative;
 
   img {
     border-radius: 0.7rem 0 0 0.7rem;
+  }
+
+  @media (max-width: 600px) {
+    img {
+      border-radius: 0.7rem 0.7rem 0 0;
+    }
   }
 `;
 
