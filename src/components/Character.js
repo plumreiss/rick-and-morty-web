@@ -8,6 +8,7 @@ const CardContainer = styled.article`
   width: 600px;
   border-radius: 0.7rem;
   background-color: rgb(60, 62, 68, 1);
+  margin: 10px;
 
   @media (max-width: 600px) {
     flex-direction: column;

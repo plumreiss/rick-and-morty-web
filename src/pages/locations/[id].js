@@ -6,13 +6,11 @@ const API = "https://rickandmortyapi.com/api";
 
 const ContainerCards = styled.main`
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   flex-wrap: wrap;
   padding: 3.5rem 0;
-
-  article {
-    margin-top: 1.3rem;
-  }
+  max-width: 70%;
+  margin: 0 auto;
 
   h2 {
     text-align: center;
