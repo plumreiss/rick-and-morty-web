@@ -12,7 +12,7 @@ const CardContainer = styled.article`
 
   @media (max-width: 600px) {
     flex-direction: column;
-    height: 600px;
+    height: 400px;
     width: 220px;
   }
 `;
