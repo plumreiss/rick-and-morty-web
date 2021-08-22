@@ -33,6 +33,11 @@ const Container = styled.div`
 const ContainerImg = styled.div`
   flex: 2 1 0%;
   width: 100%;
+  position: relative;
+
+  img {
+    border-radius: 0.7rem 0 0 0.7rem;
+  }
 `;
 
 const NameCharacter = styled.a`
@@ -76,7 +81,7 @@ export function Character({
   return (
     <CardContainer>
       <ContainerImg>
-        <Image src={image} alt={name} width="220" height="220" />
+        <Image src={image} alt={name} layout="fill" />
       </ContainerImg>
       <ContainerInformation>
         <Container>
