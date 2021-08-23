@@ -2,11 +2,12 @@ import styled from "styled-components";
 
 const FormContainer = styled.form`
   height: 100%;
-  width: 100%;
+  min-width: 80%;
+  max-width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
   align-items: center;
+  margin: 0 auto;
 `;
 
 export function Form({ handleSubmit, children }) {

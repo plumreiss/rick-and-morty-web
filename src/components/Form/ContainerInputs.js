@@ -2,8 +2,9 @@ import styled from "styled-components";
 
 const ContainerInput = styled.div`
   display: flex;
+  height: 13%;
   width: 100%;
-  flex-direction: column;
+  margin: 5px 0;
 `;
 
 export function ContainerInputs({ children }) {

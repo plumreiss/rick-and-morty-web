@@ -191,7 +191,9 @@ export default function Characters({ types, species }) {
               <Option optionValue="genderless" nameValue="Genderless" />
             </Select>
           </ContainerInputs>
-          <Input inputType="submit" inputValue="Search" />
+          <ContainerInputs>
+            <Input inputType="submit" inputValue="Search" />
+          </ContainerInputs>
         </Form>
       </Modal>
 

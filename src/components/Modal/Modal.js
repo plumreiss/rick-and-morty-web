@@ -42,14 +42,23 @@ const ButtonCloseModal = styled.div`
   }
 `;
 
+const WrapperModal = styled.div`
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+`;
+
 export function Modal({ children, isOpen, closeModal }) {
   const handleClick = (e) => e.stopPropagation();
 
   return (
     <ModalContainer isOpen={isOpen} onClick={closeModal}>
       <ModalContent onClick={handleClick}>
-        <ButtonCloseModal onClick={closeModal}>X</ButtonCloseModal>
-        {children}
+        <WrapperModal>
+          <ButtonCloseModal onClick={closeModal}>X</ButtonCloseModal>
+          {children}
+        </WrapperModal>
       </ModalContent>
     </ModalContainer>
   );
