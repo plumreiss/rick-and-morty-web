@@ -10,6 +10,7 @@ import { Option } from "../../components/Form/Option";
 import { Modal } from "../../components/Modal/Modal";
 import { useModal } from "../../hooks/useModal";
 import { ContainerInputs } from "../../components/Form/ContainerInputs";
+import { Button } from "../../components/Button";
 
 const API = "https://rickandmortyapi.com/api";
 
@@ -114,7 +115,7 @@ export default function Characters({ types, species }) {
 
   return (
     <div>
-      <button onClick={openModal}>Filter</button>
+      <Button handleOnClick={openModal} value="Filter" />
       <Modal isOpen={isOpen} closeModal={closeModal}>
         <Form handleSubmit={searchCharacters}>
           <ContainerInputs>
