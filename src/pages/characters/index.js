@@ -10,7 +10,8 @@ import { Option } from "../../components/Form/Option";
 import { Modal } from "../../components/Modal/Modal";
 import { useModal } from "../../hooks/useModal";
 import { ContainerInputs } from "../../components/Form/ContainerInputs";
-import { Button } from "../../components/Button";
+import { Button } from "../../components/Button/Button";
+import { ContainerButton } from "../../components/Button/ContainerButton";
 
 const API = "https://rickandmortyapi.com/api";
 
@@ -114,8 +115,10 @@ export default function Characters({ types, species }) {
   };
 
   return (
-    <div>
-      <Button handleOnClick={openModal} value="Filter" />
+    <>
+      <ContainerButton>
+        <Button handleOnClick={openModal} value="Filter" />
+      </ContainerButton>
       <Modal isOpen={isOpen} closeModal={closeModal}>
         <Form handleSubmit={searchCharacters}>
           <ContainerInputs>
@@ -237,7 +240,7 @@ export default function Characters({ types, species }) {
         )}
         {pagination < pages && <button onClick={nextPage}>→</button>}
       </div>
-    </div>
+    </>
   );
 }
 
