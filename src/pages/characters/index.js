@@ -12,6 +12,7 @@ import { useModal } from "../../hooks/useModal";
 import { ContainerInputs } from "../../components/Form/ContainerInputs";
 import { Button } from "../../components/Button/Button";
 import { ContainerButton } from "../../components/Button/ContainerButton";
+import { BackHome } from "../../components/BackHome";
 
 const API = "https://rickandmortyapi.com/api";
 
@@ -230,16 +231,14 @@ export default function Characters({ types, species }) {
         )}
       </ContainerCharacters>
 
-      <div>
+      <ContainerButton>
         {pagination > 1 ? (
-          <button onClick={prevPage}>←</button>
+          <Button handleOnClick={prevPage} value="Previous" />
         ) : (
-          <Link href="/">
-            <a>← Back Home</a>
-          </Link>
+          <BackHome link="/" value="Back Home" />
         )}
-        {pagination < pages && <button onClick={nextPage}>→</button>}
-      </div>
+        {pagination < pages && <Button handleOnClick={nextPage} value="Next" />}
+      </ContainerButton>
     </>
   );
 }
