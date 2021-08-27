@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const ContainerNavBar = styled.header`
   width: 100%;
-  height: 60px;
+  min-height: 60px;
   background-color: #f4f4f4;
   display: flex;
   justify-content: space-around;
