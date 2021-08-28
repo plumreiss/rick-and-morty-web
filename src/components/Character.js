@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const CardContainer = styled.article`
   display: flex;
@@ -63,6 +63,7 @@ const NameCharacter = styled.a`
 
 const SubtitleInfo = styled.span`
   color: rgb(158, 158, 158);
+  text-transform: capitalize;
 `;
 
 const InfoLink = styled.a`
@@ -72,6 +73,32 @@ const InfoLink = styled.a`
     color: orange;
     cursor: pointer;
   }
+`;
+
+const StatusIcon = styled.span`
+  height: 0.5rem;
+  width: 0.5rem;
+  margin-right: 0.375rem;
+  border-radius: 50%;
+  display: inline-block;
+
+  ${({ status }) =>
+    status === "Alive" &&
+    css`
+      background-color: rgb(85, 204, 68);
+    `}
+
+  ${({ status }) =>
+    status === "Dead" &&
+    css`
+      background-color: rgb(214, 61, 46);
+    `}
+
+    ${({ status }) =>
+    status === "unknown" &&
+    css`
+      background-color: rgb(196, 199, 194);
+    `}
 `;
 
 export function Character({
@@ -98,6 +125,7 @@ export function Character({
             </NameCharacter>
           </Link>
           <SubtitleInfo>
+            <StatusIcon status={status} />
             {status} - {species}
           </SubtitleInfo>
         </Container>
