@@ -1,4 +1,4 @@
-import { EpisodeCard } from "../../components/Cards/EpisodeCard";
+import { EpisodeCard } from "@/components/Cards/EpisodeCard";
 import styled from "styled-components";
 
 const API = "https://rickandmortyapi.com/api";

@@ -1,5 +1,5 @@
-import { TitleMain } from "../components/TitleMain/TitleMain";
-import { Character } from "../components/Cards/Character";
+import { TitleMain } from "@/components/TitleMain/TitleMain";
+import { Character } from "@/components/Cards/Character";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 

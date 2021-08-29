@@ -1,18 +1,17 @@
 import { useState, useEffect } from "react";
-import Link from "next/link";
 import styled from "styled-components";
-import { Character } from "../../components/Cards/Character";
-import { Form } from "../../components/Form/Form";
-import { Input } from "../../components/Form/Input";
-import { Label } from "../../components/Form/Label";
-import { Select } from "../../components/Form/Select";
-import { Option } from "../../components/Form/Option";
-import { Modal } from "../../components/Modal/Modal";
-import { useModal } from "../../hooks/useModal";
-import { ContainerInputs } from "../../components/Form/ContainerInputs";
-import { Button } from "../../components/Button/Button";
-import { ContainerButton } from "../../components/Button/ContainerButton";
-import { BackHome } from "../../components/BackHome";
+import { Character } from "@/components/Cards/Character";
+import { Form } from "@/components/Form/Form";
+import { Input } from "@/components/Form/Input";
+import { Label } from "@/components/Form/Label";
+import { Select } from "@/components/Form/Select";
+import { Option } from "@/components/Form/Option";
+import { Modal } from "@/components/Modal/Modal";
+import { useModal } from "hooks/useModal";
+import { ContainerInputs } from "@/components/Form/ContainerInputs";
+import { Button } from "@/components/Button/Button";
+import { ContainerButton } from "@/components/Button/ContainerButton";
+import { BackHome } from "@/components/BackHome";
 
 const API = "https://rickandmortyapi.com/api";
 

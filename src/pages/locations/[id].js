@@ -1,9 +1,9 @@
-import { Character } from "../../components/Cards/Character";
-import { LocationCard } from "../../components/Cards/LocationCard";
+import { Character } from "@/components/Cards/Character";
+import { LocationCard } from "@/components/Cards/LocationCard";
 import styled from "styled-components";
-import { WrapperCenterCard } from "../../components/Cards/WrapperCenterCard";
-import { WrapperCenterTitle } from "../../components/WrapperCenterTitle";
-import { Subtitle } from "../../components/Subtitle";
+import { WrapperCenterCard } from "@/components/Cards/WrapperCenterCard";
+import { WrapperCenterTitle } from "@/components/WrapperCenterTitle";
+import { Subtitle } from "@/components/Subtitle";
 
 const API = "https://rickandmortyapi.com/api";
 

@@ -1,5 +1,5 @@
-import { Character } from "../../components/Cards/Character";
-import { WrapperCenterCard } from "../../components/Cards/WrapperCenterCard";
+import { Character } from "@/components/Cards/Character";
+import { WrapperCenterCard } from "@/components/Cards/WrapperCenterCard";
 
 export default function CharacterPage({ characterProps }) {
   const {
