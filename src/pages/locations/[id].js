@@ -3,7 +3,7 @@ import { LocationCard } from "../../components/Cards/LocationCard";
 import styled from "styled-components";
 import { WrapperCenterCard } from "../../components/Cards/WrapperCenterCard";
 import { WrapperCenterTitle } from "../../components/WrapperCenterTitle";
-import { Subtitle } from "../../components/SubTitle";
+import { Subtitle } from "../../components/subtitle";
 
 const API = "https://rickandmortyapi.com/api";
 
