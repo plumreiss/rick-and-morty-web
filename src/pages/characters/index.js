@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import styled from "styled-components";
-import { Character } from "../../components/Character";
+import { Character } from "../../components/Cards/Character";
 import { Form } from "../../components/Form/Form";
 import { Input } from "../../components/Form/Input";
 import { Label } from "../../components/Form/Label";

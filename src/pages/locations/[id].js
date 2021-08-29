@@ -1,6 +1,9 @@
-import { Character } from "../../components/Character";
-import { LocationCard } from "../../components/LocationCard";
+import { Character } from "../../components/Cards/Character";
+import { LocationCard } from "../../components/Cards/LocationCard";
 import styled from "styled-components";
+import { WrapperCenterCard } from "../../components/Cards/WrapperCenterCard";
+import { WrapperCenterTitle } from "../../components/WrapperCenterTitle";
+import { Subtitle } from "../../components/SubTitle";
 
 const API = "https://rickandmortyapi.com/api";
 
@@ -11,11 +14,6 @@ const ContainerCards = styled.main`
   padding: 3.5rem 0;
   max-width: 70%;
   margin: 0 auto;
-
-  h2 {
-    text-align: center;
-    color: #f4f4f4;
-  }
 `;
 
 export default function Location({ location, residents }) {
@@ -23,12 +21,12 @@ export default function Location({ location, residents }) {
 
   return (
     <>
-      <ContainerCards>
+      <WrapperCenterCard>
         <LocationCard id={id} name={name} type={type} dimension={dimension} />
-      </ContainerCards>
-      <ContainerCards>
-        <h2>Residents</h2>
-      </ContainerCards>
+      </WrapperCenterCard>
+      <WrapperCenterTitle>
+        <Subtitle>Residents</Subtitle>
+      </WrapperCenterTitle>
       <ContainerCards>
         {residents.map(
           ({

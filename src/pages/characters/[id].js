@@ -1,4 +1,5 @@
-import { Character } from "../../components/Character";
+import { Character } from "../../components/Cards/Character";
+import { WrapperCenterCard } from "../../components/Cards/WrapperCenterCard";
 
 export default function CharacterPage({ characterProps }) {
   const {
@@ -14,7 +15,7 @@ export default function CharacterPage({ characterProps }) {
   } = characterProps;
 
   return (
-    <div>
+    <WrapperCenterCard>
       <Character
         id={id}
         name={name}
@@ -26,7 +27,7 @@ export default function CharacterPage({ characterProps }) {
         episodeId={episodeId}
         episodeName={episodeName}
       ></Character>
-    </div>
+    </WrapperCenterCard>
   );
 }
 

@@ -1,5 +1,8 @@
-import { Character } from "../../components/Character";
-import { EpisodeCard } from "../../components/EpisodeCard";
+import { Character } from "../../components/Cards/Character";
+import { EpisodeCard } from "../../components/Cards/EpisodeCard";
+import { WrapperCenterCard } from "../../components/Cards/WrapperCenterCard";
+import { Subtitle } from "../../components/Subtitle";
+import { WrapperCenterTitle } from "../../components/WrapperCenterTitle";
 import styled from "styled-components";
 
 const ContainerCards = styled.main`
@@ -9,11 +12,6 @@ const ContainerCards = styled.main`
   padding: 3.5rem 0;
   max-width: 70%;
   margin: 0 auto;
-
-  h2 {
-    text-align: center;
-    color: #f4f4f4;
-  }
 `;
 
 const API = "https://rickandmortyapi.com/api";
@@ -22,17 +20,17 @@ export default function episode({ _episode, characters }) {
 
   return (
     <>
-      <ContainerCards>
+      <WrapperCenterCard>
         <EpisodeCard
           id={id}
           name={name}
           air_date={air_date}
           episode={episode}
         />
-      </ContainerCards>
-      <ContainerCards>
-        <h2>Characters that appear in {episode}</h2>
-      </ContainerCards>
+      </WrapperCenterCard>
+      <WrapperCenterTitle>
+        <Subtitle>Characters that appear in {episode}</Subtitle>
+      </WrapperCenterTitle>
       <ContainerCards>
         {characters.map(
           ({

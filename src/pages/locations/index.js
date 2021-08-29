@@ -1,4 +1,4 @@
-import { LocationCard } from "../../components/LocationCard";
+import { LocationCard } from "../../components/Cards/LocationCard";
 import styled from "styled-components";
 
 const ContainerElements = styled.main`
