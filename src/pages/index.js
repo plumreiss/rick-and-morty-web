@@ -2,6 +2,8 @@ import { TitleMain } from "@/components/TitleMain/TitleMain";
 import { Character } from "@/components/Cards/Character";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
+import { LoaderSpinner } from "@/components/LoaderSpinner/LoaderSpinner";
+import { WrapperLoader } from "components/LoaderSpinner/WrapperLoader";
 
 const ContainerCards = styled.main`
   display: flex;
@@ -77,6 +79,11 @@ export default function Main() {
     <>
       <TitleMain title="Ricknedy" />
       <ContainerCards>
+        {characters.length === 0 && (
+          <WrapperLoader takeViewportHeight="214">
+            <LoaderSpinner />
+          </WrapperLoader>
+        )}
         {characters.map(
           ({
             id,

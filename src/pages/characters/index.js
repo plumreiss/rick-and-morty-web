@@ -12,6 +12,8 @@ import { ContainerInputs } from "@/components/Form/ContainerInputs";
 import { Button } from "@/components/Button/Button";
 import { ContainerButton } from "@/components/Button/ContainerButton";
 import { BackHome } from "@/components/BackHome";
+import { LoaderSpinner } from "@/components/LoaderSpinner/LoaderSpinner";
+import { WrapperLoader } from "components/LoaderSpinner/WrapperLoader";
 
 const API = "https://rickandmortyapi.com/api";
 
@@ -202,6 +204,11 @@ export default function Characters({ types, species }) {
       </Modal>
 
       <ContainerCharacters>
+        {characters.length === 0 && (
+          <WrapperLoader takeViewportHeight="60">
+            <LoaderSpinner />
+          </WrapperLoader>
+        )}
         {characters.map(
           ({
             id,
