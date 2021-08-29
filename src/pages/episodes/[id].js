@@ -1,8 +1,8 @@
-import { Character } from "../../components/Cards/Character";
-import { EpisodeCard } from "../../components/Cards/EpisodeCard";
-import { WrapperCenterCard } from "../../components/Cards/WrapperCenterCard";
-import { Subtitle } from "../../components/Subtitle";
-import { WrapperCenterTitle } from "../../components/WrapperCenterTitle";
+import { Character } from "@/components/Cards/Character";
+import { EpisodeCard } from "@/components/Cards/EpisodeCard";
+import { WrapperCenterCard } from "@/components/Cards/WrapperCenterCard";
+import { Subtitle } from "@/components/Subtitle";
+import { WrapperCenterTitle } from "@/components/WrapperCenterTitle";
 import styled from "styled-components";
 
 const ContainerCards = styled.main`
