@@ -41,7 +41,7 @@ export function LocationCard({ id, name, type, dimension }) {
   return (
     <CardLocation>
       <ContainerInfo>
-        <Link href={`/locations/${id}`}>
+        <Link href={`/locations/${id}`} passHref>
           <Title>{name}</Title>
         </Link>
       </ContainerInfo>
