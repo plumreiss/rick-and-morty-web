@@ -48,6 +48,8 @@ const ContainerImg = styled.div`
 `;
 
 const NameCharacter = styled.a`
+  text-decoration: none;
+
   h2 {
     font-size: 1.5rem;
     color: #f4f4f4;
@@ -68,6 +70,7 @@ const SubtitleInfo = styled.span`
 
 const InfoLink = styled.a`
   color: #f4f4f4;
+  text-decoration: none;
 
   &:hover {
     color: orange;
@@ -119,7 +122,7 @@ export function Character({
       </ContainerImg>
       <ContainerInformation>
         <Container>
-          <Link href={`/characters/${id}`}>
+          <Link href={`/characters/${id}`} passHref>
             <NameCharacter>
               <h2>{name}</h2>
             </NameCharacter>
@@ -131,13 +134,13 @@ export function Character({
         </Container>
         <Container>
           <SubtitleInfo>Last known location:</SubtitleInfo>
-          <Link href={`/locations/${locationId}`}>
+          <Link href={`/locations/${locationId}`} passHref>
             <InfoLink>{locationName}</InfoLink>
           </Link>
         </Container>
         <Container>
           <SubtitleInfo>First seen in:</SubtitleInfo>
-          <Link href={`/episodes/${episodeId}`}>
+          <Link href={`/episodes/${episodeId}`} passHref>
             <InfoLink>{episodeName}</InfoLink>
           </Link>
         </Container>

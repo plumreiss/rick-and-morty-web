@@ -41,7 +41,7 @@ export function EpisodeCard({ id, name, air_date, episode }) {
   return (
     <CardEpisode>
       <ContainerInfo>
-        <Link href={`/episodes/${id}`}>
+        <Link href={`/episodes/${id}`} passHref>
           <Title>{name}</Title>
         </Link>
       </ContainerInfo>
