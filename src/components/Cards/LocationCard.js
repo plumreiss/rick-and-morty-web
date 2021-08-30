@@ -10,6 +10,7 @@ const CardLocation = styled.article`
   background-color: rgb(60, 62, 68, 1);
   text-align: center;
   border-radius: 0.7rem;
+  margin: 10px;
 `;
 
 const ContainerInfo = styled.div`

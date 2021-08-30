@@ -1,18 +1,7 @@
 import { EpisodeCard } from "@/components/Cards/EpisodeCard";
-import styled from "styled-components";
+import { ContainerCards } from "@/components/Cards/ContainerCards";
 
 const API = "https://rickandmortyapi.com/api";
-
-const ContainerCards = styled.main`
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  padding: 3.5rem 0;
-
-  article {
-    margin-top: 1.3rem;
-  }
-`;
 
 export default function Episodes({ episodes }) {
   return (

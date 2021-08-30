@@ -1,18 +1,9 @@
+import { useState, useEffect } from "react";
 import { TitleMain } from "@/components/TitleMain/TitleMain";
 import { Character } from "@/components/Cards/Character";
-import { useState, useEffect } from "react";
-import styled from "styled-components";
 import { LoaderSpinner } from "@/components/LoaderSpinner/LoaderSpinner";
-import { WrapperLoader } from "components/LoaderSpinner/WrapperLoader";
-
-const ContainerCards = styled.main`
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  padding: 3.5rem 0;
-  max-width: 70%;
-  margin: 0 auto;
-`;
+import { WrapperLoader } from "@/components/LoaderSpinner/WrapperLoader";
+import { ContainerCards } from "@/components/Cards/ContainerCards";
 
 const API = "https://rickandmortyapi.com/api";
 

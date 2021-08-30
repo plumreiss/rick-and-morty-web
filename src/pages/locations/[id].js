@@ -4,17 +4,9 @@ import styled from "styled-components";
 import { WrapperCenterCard } from "@/components/Cards/WrapperCenterCard";
 import { WrapperCenterTitle } from "@/components/WrapperCenterTitle";
 import { Subtitle } from "@/components/Subtitle";
+import { ContainerCards } from "@/components/Cards/ContainerCards";
 
 const API = "https://rickandmortyapi.com/api";
-
-const ContainerCards = styled.main`
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  padding: 3.5rem 0;
-  max-width: 70%;
-  margin: 0 auto;
-`;
 
 export default function Location({ location, residents }) {
   const { id, name, type, dimension } = location;

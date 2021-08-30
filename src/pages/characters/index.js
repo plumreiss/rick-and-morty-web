@@ -14,17 +14,9 @@ import { ContainerButton } from "@/components/Button/ContainerButton";
 import { BackHome } from "@/components/BackHome";
 import { LoaderSpinner } from "@/components/LoaderSpinner/LoaderSpinner";
 import { WrapperLoader } from "components/LoaderSpinner/WrapperLoader";
+import { ContainerCards } from "@/components/Cards/ContainerCards";
 
 const API = "https://rickandmortyapi.com/api";
-
-const ContainerCharacters = styled.main`
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  padding: 3.5rem 0;
-  max-width: 70%;
-  margin: 0 auto;
-`;
 
 const initialForm = {
   name: "",
@@ -203,7 +195,7 @@ export default function Characters({ types, species }) {
         </Form>
       </Modal>
 
-      <ContainerCharacters>
+      <ContainerCards>
         {characters.length === 0 && (
           <WrapperLoader takeViewportHeight="60">
             <LoaderSpinner />
@@ -235,7 +227,7 @@ export default function Characters({ types, species }) {
             />
           )
         )}
-      </ContainerCharacters>
+      </ContainerCards>
 
       <ContainerButton>
         {pagination > 1 ? (
