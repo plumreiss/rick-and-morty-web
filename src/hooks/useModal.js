@@ -5,10 +5,12 @@ export function useModal(initialState) {
 
   const openModal = () => {
     setIsOpen(true);
+    document.body.style.overflowY = "hidden";
   };
 
   const closeModal = () => {
     setIsOpen(false);
+    document.body.style.overflowY = "auto";
   };
 
   useEffect(() => {
