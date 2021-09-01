@@ -12,6 +12,10 @@ const ContainerNavBar = styled.header`
   @media (max-width: 500px) {
     flex-direction: column;
   }
+
+  a {
+    text-decoration: none;
+  }
 `;
 
 const Title = styled.h1`
@@ -41,7 +45,9 @@ export function NavBar() {
   return (
     <ContainerNavBar>
       <Link href="/">
-        <Title>Ricknedy</Title>
+        <a>
+          <Title>Ricknedy</Title>
+        </a>
       </Link>
       <ContainerNav>
         <Link href="/characters">
