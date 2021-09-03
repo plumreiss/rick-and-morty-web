@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const WrapperCards = styled.main`
+const WrapperCards = styled.section`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
