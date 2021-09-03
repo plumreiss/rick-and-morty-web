@@ -105,6 +105,7 @@ export default function Characters({ types, species }) {
   const searchCharacters = (e) => {
     e.preventDefault();
     setCharacters([]);
+    setPagination(1);
     setSearch((prevSearch) => ++prevSearch);
   };
 
