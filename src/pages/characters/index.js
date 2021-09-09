@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import styled from "styled-components";
 import { Character } from "@/components/Cards/Character";
 import { Form } from "@/components/Form/Form";
 import { Input } from "@/components/Form/Input";
@@ -33,47 +32,60 @@ export default function Characters({ types, species }) {
   const [form, setForm] = useState(initialForm);
   const [search, setSearch] = useState(0);
   const { isOpen, openModal, closeModal } = useModal(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     const { name, status, type, species, gender } = form;
 
     const getCharacters = async () => {
-      const res = await fetch(
-        `${API}/character/?page=${pagination}&name=${name}&status=${status}&type=${type}&species=${species}&gender=${gender}`
-      );
-      const data = await res.json();
-      setPages(data.info.pages);
-      data.results.forEach(
-        async ({ id, name, image, status, species, location, episode }) => {
-          const firstEpisode = episode[0];
+      setIsLoading(true);
 
-          const episodeId = firstEpisode.substr(
-            firstEpisode.lastIndexOf("/") + 1
-          );
-          const resEpisode = await fetch(firstEpisode);
-          const episodeJson = await resEpisode.json();
-          const episodeName = episodeJson.name;
+      try {
+        const res = await fetch(
+          `${API}/character/?page=${pagination}&name=${name}&status=${status}&type=${type}&species=${species}&gender=${gender}`
+        );
+        const data = await res.json();
+        setPages(data.info.pages);
+        data.results.forEach(
+          async ({ id, name, image, status, species, location, episode }) => {
+            const firstEpisode = episode[0];
 
-          const locationName = location.name;
-          const urlLocation = location.url;
-          const locationId = urlLocation.substr(
-            urlLocation.lastIndexOf("/") + 1
-          );
+            const episodeId = firstEpisode.substr(
+              firstEpisode.lastIndexOf("/") + 1
+            );
+            const resEpisode = await fetch(firstEpisode);
+            const episodeJson = await resEpisode.json();
+            const episodeName = episodeJson.name;
 
-          const newCharacter = {
-            id,
-            name,
-            image,
-            status,
-            species,
-            locationName,
-            locationId,
-            episodeId,
-            episodeName,
-          };
-          setCharacters((prevCharacters) => [...prevCharacters, newCharacter]);
-        }
-      );
+            const locationName = location.name;
+            const urlLocation = location.url;
+            const locationId = urlLocation.substr(
+              urlLocation.lastIndexOf("/") + 1
+            );
+
+            const newCharacter = {
+              id,
+              name,
+              image,
+              status,
+              species,
+              locationName,
+              locationId,
+              episodeId,
+              episodeName,
+            };
+            setCharacters((prevCharacters) => [
+              ...prevCharacters,
+              newCharacter,
+            ]);
+          }
+        );
+
+        setIsLoading(false);
+      } catch (err) {
+        setError(true);
+      }
     };
 
     getCharacters();
@@ -107,6 +119,7 @@ export default function Characters({ types, species }) {
     setCharacters([]);
     setPagination(1);
     setSearch((prevSearch) => ++prevSearch);
+    setError(false);
   };
 
   return (
@@ -197,11 +210,18 @@ export default function Characters({ types, species }) {
       </Modal>
 
       <ContainerCards>
-        {characters.length === 0 && (
-          <WrapperLoader takeViewportHeight="60">
+        {isLoading && (
+          <WrapperLoader takeViewportHeight="214">
             <LoaderSpinner />
           </WrapperLoader>
         )}
+
+        {error && (
+          <WrapperLoader takeViewportHeight="214">
+            <h2>Have ocurred and error</h2>
+          </WrapperLoader>
+        )}
+
         {characters.map(
           ({
             id,
