@@ -7,6 +7,7 @@ const WrapperCards = styled.section`
   padding: 3.5rem 0;
   max-width: 70%;
   margin: 0 auto;
+  min-height:  calc(100vh - 88px);
 `;
 
 export function ContainerCards({ children }) {

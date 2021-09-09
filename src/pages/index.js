@@ -9,6 +9,8 @@ const API = "https://rickandmortyapi.com/api";
 
 export default function Main() {
   const [characters, setCharacters] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   const getNumberRandom = (min, max) => {
     return Math.floor(Math.random() * (max - min) + min);
@@ -16,52 +18,63 @@ export default function Main() {
 
   useEffect(() => {
     const getCharacters = async () => {
-      const res = await fetch(`${API}/character`);
-      const data = await res.json();
-      const numberCharacters = data.info.count;
-      const numbers = Array.from({ length: 6 }, () =>
-        getNumberRandom(1, numberCharacters)
-      );
+      setIsLoading(true);
 
-      const resCharacters = await Promise.all(
-        numbers.map((number) => fetch(`${API}/character/${number}`))
-      );
+      try {
+        const res = await fetch(`${API}/character`);
+        const data = await res.json();
+        const numberCharacters = data.info.count;
+        const numbers = Array.from({ length: 6 }, () =>
+          getNumberRandom(1, numberCharacters)
+        );
 
-      const dataCharacters = await Promise.all(
-        resCharacters.map((resCharacter) => resCharacter.json())
-      );
+        const resCharacters = await Promise.all(
+          numbers.map((number) => fetch(`${API}/character/${number}`))
+        );
 
-      dataCharacters.forEach(
-        async ({ id, name, image, status, species, location, episode }) => {
-          const firstEpisode = episode[0];
+        const dataCharacters = await Promise.all(
+          resCharacters.map((resCharacter) => resCharacter.json())
+        );
 
-          const episodeId = firstEpisode.substr(
-            firstEpisode.lastIndexOf("/") + 1
-          );
-          const resEpisode = await fetch(firstEpisode);
-          const episodeJson = await resEpisode.json();
-          const episodeName = episodeJson.name;
+        dataCharacters.forEach(
+          async ({ id, name, image, status, species, location, episode }) => {
+            const firstEpisode = episode[0];
 
-          const locationName = location.name;
-          const urlLocation = location.url;
-          const locationId = urlLocation.substr(
-            urlLocation.lastIndexOf("/") + 1
-          );
+            const episodeId = firstEpisode.substr(
+              firstEpisode.lastIndexOf("/") + 1
+            );
+            const resEpisode = await fetch(firstEpisode);
+            const episodeJson = await resEpisode.json();
+            const episodeName = episodeJson.name;
 
-          const newCharacter = {
-            id,
-            name,
-            image,
-            status,
-            species,
-            locationName,
-            locationId,
-            episodeId,
-            episodeName,
-          };
-          setCharacters((prevCharacters) => [...prevCharacters, newCharacter]);
-        }
-      );
+            const locationName = location.name;
+            const urlLocation = location.url;
+            const locationId = urlLocation.substr(
+              urlLocation.lastIndexOf("/") + 1
+            );
+
+            const newCharacter = {
+              id,
+              name,
+              image,
+              status,
+              species,
+              locationName,
+              locationId,
+              episodeId,
+              episodeName,
+            };
+            setCharacters((prevCharacters) => [
+              ...prevCharacters,
+              newCharacter,
+            ]);
+          }
+        );
+
+        setIsLoading(false);
+      } catch (err) {
+        setError(true);
+      }
     };
     getCharacters();
   }, []);
@@ -70,9 +83,15 @@ export default function Main() {
     <>
       <TitleMain title="Ricknedy" />
       <ContainerCards>
-        {characters.length === 0 && (
+        {isLoading && (
           <WrapperLoader takeViewportHeight="214">
             <LoaderSpinner />
+          </WrapperLoader>
+        )}
+
+        {error && (
+          <WrapperLoader takeViewportHeight="214">
+            <h2>Have ocurred and error</h2>
           </WrapperLoader>
         )}
         {characters.map(
