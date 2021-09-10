@@ -14,6 +14,7 @@ import { BackHome } from "@/components/BackHome";
 import { LoaderSpinner } from "@/components/LoaderSpinner/LoaderSpinner";
 import { WrapperLoader } from "components/LoaderSpinner/WrapperLoader";
 import { ContainerCards } from "@/components/Cards/ContainerCards";
+import { ErrorMessage } from "@/components/Cards/ErrorMessage";
 
 const API = "https://rickandmortyapi.com/api";
 
@@ -218,7 +219,7 @@ export default function Characters({ types, species }) {
 
         {error && (
           <WrapperLoader takeViewportHeight="214">
-            <h2>Have ocurred and error</h2>
+            <ErrorMessage />
           </WrapperLoader>
         )}
 
