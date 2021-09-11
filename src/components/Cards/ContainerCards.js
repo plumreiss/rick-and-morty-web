@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const WrapperCards = styled.section`
   display: flex;
@@ -7,9 +7,18 @@ const WrapperCards = styled.section`
   padding: 3.5rem 0;
   max-width: 70%;
   margin: 0 auto;
-  min-height:  calc(100vh - 88px);
+
+  ${({ takeViewportHeight }) =>
+    takeViewportHeight &&
+    css`
+      min-height: calc(100vh - ${takeViewportHeight}px);
+    `}
 `;
 
-export function ContainerCards({ children }) {
-  return <WrapperCards>{children}</WrapperCards>;
+export function ContainerCards({ children, takeViewportHeight }) {
+  return (
+    <WrapperCards takeViewportHeight={takeViewportHeight}>
+      {children}
+    </WrapperCards>
+  );
 }
