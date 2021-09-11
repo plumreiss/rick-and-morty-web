@@ -83,15 +83,15 @@ export default function Main() {
   return (
     <>
       <TitleMain title="Ricknedy" />
-      <ContainerCards>
+      <ContainerCards takeViewportHeight="307.88">
         {isLoading && (
-          <WrapperLoader takeViewportHeight="214">
+          <WrapperLoader>
             <LoaderSpinner />
           </WrapperLoader>
         )}
 
         {error && (
-          <WrapperLoader takeViewportHeight="214">
+          <WrapperLoader>
             <ErrorMessage />
           </WrapperLoader>
         )}

@@ -210,15 +210,15 @@ export default function Characters({ types, species }) {
         </Form>
       </Modal>
 
-      <ContainerCards>
+      <ContainerCards takeViewportHeight="299.88">
         {isLoading && (
-          <WrapperLoader takeViewportHeight="214">
+          <WrapperLoader>
             <LoaderSpinner />
           </WrapperLoader>
         )}
 
         {error && (
-          <WrapperLoader takeViewportHeight="214">
+          <WrapperLoader>
             <ErrorMessage />
           </WrapperLoader>
         )}
