@@ -1,7 +1,7 @@
 import Link from "next/link";
 import styled from "styled-components";
 
-const LinkStyled = styled.a`
+const StyledLink = styled.a`
   color: rgb(158, 158, 158);
   margin: 0 5px 0 0;
   font-size: 1em;
@@ -16,8 +16,8 @@ const LinkStyled = styled.a`
 
 export function BackHome({ link, value }) {
   return (
-    <Link href={link}>
-      <LinkStyled>{value}</LinkStyled>
+    <Link href={link} passHref>
+      <StyledLink>{value}</StyledLink>
     </Link>
   );
 }
