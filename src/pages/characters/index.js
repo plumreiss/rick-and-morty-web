@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { API } from "@/constants/constants";
 import { Character } from "@/components/Cards/Character";
 import { Form } from "@/components/Form/Form";
 import { Input } from "@/components/Form/Input";
@@ -15,8 +16,6 @@ import { LoaderSpinner } from "@/components/LoaderSpinner/LoaderSpinner";
 import { WrapperLoader } from "components/LoaderSpinner/WrapperLoader";
 import { ContainerCards } from "@/components/Cards/ContainerCards";
 import { ErrorMessage } from "@/components/Cards/ErrorMessage";
-
-const API = "https://rickandmortyapi.com/api";
 
 const initialForm = {
   name: "",

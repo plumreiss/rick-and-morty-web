@@ -1,11 +1,10 @@
+import { API } from "@/constants/constants";
 import { Character } from "@/components/Cards/Character";
 import { EpisodeCard } from "@/components/Cards/EpisodeCard";
 import { WrapperCenterCard } from "@/components/Cards/WrapperCenterCard";
 import { Subtitle } from "@/components/Subtitle";
 import { WrapperCenterTitle } from "@/components/WrapperCenterTitle";
 import { ContainerCards } from "@/components/Cards/ContainerCards";
-
-const API = "https://rickandmortyapi.com/api";
 
 export default function episode({ _episode, characters }) {
   const { id, name, air_date, episode } = _episode;

@@ -1,12 +1,10 @@
+import { API } from "@/constants/constants";
 import { Character } from "@/components/Cards/Character";
 import { LocationCard } from "@/components/Cards/LocationCard";
-import styled from "styled-components";
 import { WrapperCenterCard } from "@/components/Cards/WrapperCenterCard";
 import { WrapperCenterTitle } from "@/components/WrapperCenterTitle";
 import { Subtitle } from "@/components/Subtitle";
 import { ContainerCards } from "@/components/Cards/ContainerCards";
-
-const API = "https://rickandmortyapi.com/api";
 
 export default function Location({ location, residents }) {
   const { id, name, type, dimension } = location;

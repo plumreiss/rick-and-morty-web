@@ -1,7 +1,6 @@
+import { API } from "@/constants/constants";
 import { EpisodeCard } from "@/components/Cards/EpisodeCard";
 import { ContainerCards } from "@/components/Cards/ContainerCards";
-
-const API = "https://rickandmortyapi.com/api";
 
 export default function Episodes({ episodes }) {
   return (
