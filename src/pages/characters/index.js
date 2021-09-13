@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { API } from "@/constants/constants";
+import { API, CHARACTER_FORM } from "@/constants/constants";
 import { Character } from "@/components/Cards/Character";
 import { Form } from "@/components/Form/Form";
 import { Input } from "@/components/Form/Input";
@@ -17,19 +17,11 @@ import { WrapperLoader } from "components/LoaderSpinner/WrapperLoader";
 import { ContainerCards } from "@/components/Cards/ContainerCards";
 import { ErrorMessage } from "@/components/Cards/ErrorMessage";
 
-const initialForm = {
-  name: "",
-  status: "",
-  species: "",
-  type: "",
-  gender: "",
-};
-
 export default function Characters({ types, species }) {
   const [characters, setCharacters] = useState([]);
   const [pages, setPages] = useState(0);
   const [pagination, setPagination] = useState(1);
-  const [form, setForm] = useState(initialForm);
+  const [form, setForm] = useState(CHARACTER_FORM);
   const [search, setSearch] = useState(0);
   const { isOpen, openModal, closeModal } = useModal(false);
   const [isLoading, setIsLoading] = useState(false);
