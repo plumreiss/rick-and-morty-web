@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { URLS } from "@/constants/constants";
 
 const ContainerFooter = styled.footer`
   display: flex;
@@ -17,12 +18,13 @@ const MadeBy = styled.span`
 `;
 
 export function Footer() {
+  const { myGithub } = URLS;
   return (
     <>
       <ContainerFooter>
         <MadeBy>
           Made by
-          <a href="https://github.com/plumreiss" target="_blank">
+          <a href={myGithub} target="_blank">
             {" "}
             Angel Padrino
           </a>

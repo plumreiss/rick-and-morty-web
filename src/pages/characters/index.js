@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { API, CHARACTER_FORM } from "@/constants/constants";
+import { URLS } from "@/constants/constants";
 import { Character } from "@/components/Cards/Character";
 import { Form } from "@/components/Form/Form";
 import { Input } from "@/components/Form/Input";
@@ -16,25 +18,17 @@ import { WrapperLoader } from "components/LoaderSpinner/WrapperLoader";
 import { ContainerCards } from "@/components/Cards/ContainerCards";
 import { ErrorMessage } from "@/components/Cards/ErrorMessage";
 
-const API = "https://rickandmortyapi.com/api";
-
-const initialForm = {
-  name: "",
-  status: "",
-  species: "",
-  type: "",
-  gender: "",
-};
-
 export default function Characters({ types, species }) {
   const [characters, setCharacters] = useState([]);
   const [pages, setPages] = useState(0);
   const [pagination, setPagination] = useState(1);
-  const [form, setForm] = useState(initialForm);
+  const [form, setForm] = useState(CHARACTER_FORM);
   const [search, setSearch] = useState(0);
   const { isOpen, openModal, closeModal } = useModal(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
+
+  const { homePage } = URLS;
 
   useEffect(() => {
     const { name, status, type, species, gender } = form;
@@ -255,7 +249,7 @@ export default function Characters({ types, species }) {
         {pagination > 1 ? (
           <Button handleOnClick={prevPage} value="Previous" />
         ) : (
-          <BackHome link="/" value="Back Home" />
+          <BackHome url={homePage} value="Back Home" />
         )}
         {pagination < pages && <Button handleOnClick={nextPage} value="Next" />}
       </ContainerButton>

@@ -1,3 +1,4 @@
+import { API } from "@/constants/constants";
 import { LocationCard } from "@/components/Cards/LocationCard";
 import { ContainerCards } from "@/components/Cards/ContainerCards";
 
@@ -18,8 +19,6 @@ export default function Locations({ locations }) {
 }
 
 export async function getStaticProps() {
-  const API = "https://rickandmortyapi.com/api";
-
   const res = await fetch(`${API}/location`);
   const data = await res.json();
 

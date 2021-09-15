@@ -1,3 +1,4 @@
+import { API } from "@/constants/constants";
 import { Character } from "@/components/Cards/Character";
 import { WrapperCenterCard } from "@/components/Cards/WrapperCenterCard";
 
@@ -32,8 +33,6 @@ export default function CharacterPage({ characterProps }) {
 }
 
 export async function getStaticPaths() {
-  const API = "https://rickandmortyapi.com/api";
-
   const res = await fetch(`${API}/character`);
   const data = await res.json();
   const numberCharacters = data.info.count;
@@ -55,9 +54,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const res = await fetch(
-    `https://rickandmortyapi.com/api/character/${params.id}`
-  );
+  const res = await fetch(`${API}/character/${params.id}`);
   const characterJson = await res.json();
 
   const firstEpisode = characterJson.episode[0];

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import styled from "styled-components";
+import { URLS } from "@/constants/constants";
 
 const ContainerNavBar = styled.header`
   width: 100%;
@@ -42,23 +43,25 @@ const ContainerNav = styled.nav`
 `;
 
 export function NavBar() {
+  const { homePage, charactersPage, locationsPage, episodesPage } = URLS;
+
   return (
     <ContainerNavBar>
-      <Link href="/">
+      <Link href={homePage}>
         <a>
           <Title>Ricknedy</Title>
         </a>
       </Link>
       <ContainerNav>
-        <Link href="/characters">
+        <Link href={`/${charactersPage}`}>
           <a>Characters</a>
         </Link>
 
-        <Link href="/locations">
+        <Link href={`/${locationsPage}`}>
           <a>Locations</a>
         </Link>
 
-        <Link href="/episodes">
+        <Link href={`/${episodesPage}`}>
           <a>Episodes</a>
         </Link>
       </ContainerNav>

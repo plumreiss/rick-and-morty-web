@@ -14,9 +14,9 @@ const StyledLink = styled.a`
   }
 `;
 
-export function BackHome({ link, value }) {
+export function BackHome({ url, value }) {
   return (
-    <Link href={link} passHref>
+    <Link href={url} passHref>
       <StyledLink>{value}</StyledLink>
     </Link>
   );
