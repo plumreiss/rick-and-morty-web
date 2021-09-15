@@ -7,3 +7,11 @@ export const CHARACTER_FORM = {
   type: "",
   gender: "",
 };
+
+export const URLS = {
+  homePage: "/",
+  charactersPage: "characters",
+  locationsPage: "locations",
+  episodesPage: "episodes",
+  myGithub: "https://github.com/plumreiss",
+};

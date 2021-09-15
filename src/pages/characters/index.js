@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { API, CHARACTER_FORM } from "@/constants/constants";
+import { URLS } from "@/constants/constants";
 import { Character } from "@/components/Cards/Character";
 import { Form } from "@/components/Form/Form";
 import { Input } from "@/components/Form/Input";
@@ -26,6 +27,8 @@ export default function Characters({ types, species }) {
   const { isOpen, openModal, closeModal } = useModal(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
+
+  const { homePage } = URLS;
 
   useEffect(() => {
     const { name, status, type, species, gender } = form;
@@ -246,7 +249,7 @@ export default function Characters({ types, species }) {
         {pagination > 1 ? (
           <Button handleOnClick={prevPage} value="Previous" />
         ) : (
-          <BackHome link="/" value="Back Home" />
+          <BackHome url={homePage} value="Back Home" />
         )}
         {pagination < pages && <Button handleOnClick={nextPage} value="Next" />}
       </ContainerButton>
