@@ -28,10 +28,7 @@ export async function getStaticProps() {
   );
 
   const locationsRes = await Promise.all(
-    pagesLocation.map((page) => {
-      const locationRes = fetch(`${API}/location/?page=${page}`);
-      return locationRes;
-    })
+    pagesLocation.map((page) => fetch(`${API}/location/?page=${page}`))
   );
 
   const locationsPages = await Promise.all(

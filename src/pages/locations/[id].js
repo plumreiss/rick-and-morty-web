@@ -71,9 +71,7 @@ export async function getStaticProps({ params }) {
   const location = await locationRes.json();
 
   const residentsRes = await Promise.all(
-    location.residents.map((resident) => {
-      return fetch(resident);
-    })
+    location.residents.map((resident) => fetch(resident))
   );
 
   const residentsData = await Promise.all(
