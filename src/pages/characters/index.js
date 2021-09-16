@@ -23,7 +23,7 @@ export default function Characters({ types, species }) {
   const [pages, setPages] = useState(0);
   const [pagination, setPagination] = useState(1);
   const [form, setForm] = useState(CHARACTER_FORM);
-  const [search, setSearch] = useState(0);
+  const [search, setSearch] = useState(false);
   const { isOpen, openModal, closeModal } = useModal(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -34,14 +34,14 @@ export default function Characters({ types, species }) {
     const { name, status, type, species, gender } = form;
 
     const getCharacters = async () => {
-      setIsLoading(true);
+      changeIsLoadingState();
 
       try {
         const res = await fetch(
           `${API}/character/?page=${pagination}&name=${name}&status=${status}&type=${type}&species=${species}&gender=${gender}`
         );
         const data = await res.json();
-        setPages(data.info.pages);
+        getNumberOfPages(data.info.pages);
         data.results.forEach(
           async ({ id, name, image, status, species, location, episode }) => {
             const firstEpisode = episode[0];
@@ -77,7 +77,7 @@ export default function Characters({ types, species }) {
           }
         );
 
-        setIsLoading(false);
+        changeIsLoadingState();
       } catch (err) {
         setError(true);
       }
@@ -91,30 +91,36 @@ export default function Characters({ types, species }) {
   };
 
   const nextPage = () => {
-    setCharacters([]);
+    resetCharacters();
     setPagination((prevPagination) => ++prevPagination);
   };
 
   const prevPage = () => {
-    setCharacters([]);
+    resetCharacters();
     setPagination((prevPagination) => --prevPagination);
   };
 
-  const convertToLowerCase = (str) => {
-    return str.toLowerCase();
-  };
+  const changeIsLoadingState = () =>
+    setIsLoading((prevIsLoading) => !prevIsLoading);
 
-  const getTagKey = (str) => {
-    const tagKey = convertToLowerCase(str.replace(/\s+/g, "%20"));
-    return tagKey;
-  };
+  const convertToLowerCase = (str) => str.toLowerCase();
+
+  const getNumberOfPages = (numberOfPages) => setPages(numberOfPages);
+
+  const getTagKey = (str) => convertToLowerCase(str.replace(/\s+/g, "%20"));
+
+  const resetCharacters = () => setCharacters([]);
+
+  const resetPagination = () => setPagination(1);
+
+  const resetError = () => setError(false);
 
   const searchCharacters = (e) => {
     e.preventDefault();
-    setCharacters([]);
-    setPagination(1);
-    setSearch((prevSearch) => ++prevSearch);
-    setError(false);
+    resetCharacters();
+    resetPagination();
+    resetError();
+    setSearch((prevSearch) => !prevSearch);
   };
 
   return (
@@ -258,9 +264,7 @@ export default function Characters({ types, species }) {
 }
 
 const deleteDuplicate = (arr) => {
-  return arr.filter((value, index) => {
-    return arr.indexOf(value) === index;
-  });
+  return arr.filter((value, index) => arr.indexOf(value) === index);
 };
 
 export async function getStaticProps() {
@@ -269,17 +273,11 @@ export async function getStaticProps() {
   const pages = Array.from({ length: data.info.pages }, (v, i) => i + 1);
 
   const newRes = await Promise.all(
-    pages.map((page) => {
-      const resCharacters = fetch(`${API}/character/?page=${page}`);
-
-      return resCharacters;
-    })
+    pages.map((page) => fetch(`${API}/character/?page=${page}`))
   );
 
   const characters = await Promise.all(
-    newRes.map((character) => {
-      return character.json();
-    })
+    newRes.map((character) => character.json())
   );
 
   const allTypes = characters
