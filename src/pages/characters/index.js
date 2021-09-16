@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { API, CHARACTER_FORM } from "@/constants/constants";
 import { URLS } from "@/constants/constants";
+import { getTagKey } from "@/utils/getTagKey";
+import { removeDuplicates } from "@/utils/removeDuplicates";
 import { Character } from "@/components/Cards/Character";
 import { Form } from "@/components/Form/Form";
 import { Input } from "@/components/Form/Input";
@@ -103,11 +105,7 @@ export default function Characters({ types, species }) {
   const changeIsLoadingState = () =>
     setIsLoading((prevIsLoading) => !prevIsLoading);
 
-  const convertToLowerCase = (str) => str.toLowerCase();
-
   const getNumberOfPages = (numberOfPages) => setPages(numberOfPages);
-
-  const getTagKey = (str) => convertToLowerCase(str.replace(/\s+/g, "%20"));
 
   const resetCharacters = () => setCharacters([]);
 
@@ -263,10 +261,6 @@ export default function Characters({ types, species }) {
   );
 }
 
-const deleteDuplicate = (arr) => {
-  return arr.filter((value, index) => arr.indexOf(value) === index);
-};
-
 export async function getStaticProps() {
   const res = await fetch(`${API}/character`);
   const data = await res.json();
@@ -288,8 +282,8 @@ export async function getStaticProps() {
     .map((el) => el.results.map((character) => character.species))
     .flat();
 
-  const types = deleteDuplicate(allTypes);
-  const species = deleteDuplicate(allSpecies);
+  const types = removeDuplicates(allTypes);
+  const species = removeDuplicates(allSpecies);
 
   return {
     props: { types, species },

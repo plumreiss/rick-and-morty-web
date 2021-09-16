@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { API } from "@/constants/constants";
+import { getNumberRandom } from "@/utils/getNumberRandom";
 import { TitleMain } from "@/components/TitleMain/TitleMain";
 import { Character } from "@/components/Cards/Character";
 import { LoaderSpinner } from "@/components/LoaderSpinner/LoaderSpinner";
@@ -11,10 +12,6 @@ export default function Main() {
   const [characters, setCharacters] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
-
-  const getNumberRandom = (min, max) => {
-    return Math.floor(Math.random() * (max - min) + min);
-  };
 
   useEffect(() => {
     const getCharacters = async () => {
