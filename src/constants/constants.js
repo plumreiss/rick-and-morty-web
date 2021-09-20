@@ -18,4 +18,7 @@ export const URLS = {
 
 export const SEO_TITLES = {
   titleHome: "Ricknedy - Find information about your favorite characters",
+  titleCharacters: "Filter and find your favorite characters",
+  titleLocations: "Search for locations and see who their residents are",
+  titleEpisodes: "Search for episodes and see what characters appear",
 };

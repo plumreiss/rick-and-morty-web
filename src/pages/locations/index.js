@@ -1,20 +1,24 @@
-import { API } from "@/constants/constants";
+import { API, SEO_TITLES } from "@/constants/constants";
 import { LocationCard } from "@/components/Cards/LocationCard";
 import { ContainerCards } from "@/components/Cards/ContainerCards";
+import { HeadTag } from "@/components/HeadTag/HeadTag";
 
 export default function Locations({ locations }) {
   return (
-    <ContainerCards>
-      {locations.map(({ id, name, type, dimension }) => (
-        <LocationCard
-          key={id}
-          id={id}
-          name={name}
-          type={type}
-          dimension={dimension}
-        />
-      ))}
-    </ContainerCards>
+    <>
+      <HeadTag title={SEO_TITLES["titleLocations"]} />
+      <ContainerCards>
+        {locations.map(({ id, name, type, dimension }) => (
+          <LocationCard
+            key={id}
+            id={id}
+            name={name}
+            type={type}
+            dimension={dimension}
+          />
+        ))}
+      </ContainerCards>
+    </>
   );
 }
 

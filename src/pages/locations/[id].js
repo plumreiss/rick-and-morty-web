@@ -5,12 +5,15 @@ import { WrapperCenterCard } from "@/components/Cards/WrapperCenterCard";
 import { WrapperCenterTitle } from "@/components/WrapperCenterTitle";
 import { Subtitle } from "@/components/Subtitle";
 import { ContainerCards } from "@/components/Cards/ContainerCards";
+import { HeadTag } from "components/HeadTag/HeadTag";
 
 export default function Location({ location, residents }) {
   const { id, name, type, dimension } = location;
 
   return (
     <>
+      <HeadTag title={name} />
+
       <WrapperCenterCard>
         <LocationCard id={id} name={name} type={type} dimension={dimension} />
       </WrapperCenterCard>

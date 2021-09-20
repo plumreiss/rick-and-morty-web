@@ -7,7 +7,7 @@ import { LoaderSpinner } from "@/components/LoaderSpinner/LoaderSpinner";
 import { WrapperLoader } from "@/components/LoaderSpinner/WrapperLoader";
 import { ContainerCards } from "@/components/Cards/ContainerCards";
 import { ErrorMessage } from "@/components/Cards/ErrorMessage";
-import { HeadTag } from "components/HeadTag/HeadTag";
+import { HeadTag } from "@/components/HeadTag/HeadTag";
 
 export default function Main() {
   const [characters, setCharacters] = useState([]);

@@ -5,12 +5,15 @@ import { WrapperCenterCard } from "@/components/Cards/WrapperCenterCard";
 import { Subtitle } from "@/components/Subtitle";
 import { WrapperCenterTitle } from "@/components/WrapperCenterTitle";
 import { ContainerCards } from "@/components/Cards/ContainerCards";
+import { HeadTag } from "@/components/HeadTag/HeadTag";
 
 export default function episode({ _episode, characters }) {
   const { id, name, air_date, episode } = _episode;
 
   return (
     <>
+      <HeadTag title={name} />
+
       <WrapperCenterCard>
         <EpisodeCard
           id={id}

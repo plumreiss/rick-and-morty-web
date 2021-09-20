@@ -1,6 +1,7 @@
 import { API } from "@/constants/constants";
 import { Character } from "@/components/Cards/Character";
 import { WrapperCenterCard } from "@/components/Cards/WrapperCenterCard";
+import { HeadTag } from "components/HeadTag/HeadTag";
 
 export default function CharacterPage({ characterProps }) {
   const {
@@ -16,19 +17,22 @@ export default function CharacterPage({ characterProps }) {
   } = characterProps;
 
   return (
-    <WrapperCenterCard>
-      <Character
-        id={id}
-        name={name}
-        status={status}
-        species={species}
-        image={image}
-        locationName={locationName}
-        locationId={locationId}
-        episodeId={episodeId}
-        episodeName={episodeName}
-      ></Character>
-    </WrapperCenterCard>
+    <>
+      <HeadTag title={name} />
+      <WrapperCenterCard>
+        <Character
+          id={id}
+          name={name}
+          status={status}
+          species={species}
+          image={image}
+          locationName={locationName}
+          locationId={locationId}
+          episodeId={episodeId}
+          episodeName={episodeName}
+        ></Character>
+      </WrapperCenterCard>
+    </>
   );
 }
 

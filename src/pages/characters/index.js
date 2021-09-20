@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { API, CHARACTER_FORM } from "@/constants/constants";
+import { API, CHARACTER_FORM, SEO_TITLES } from "@/constants/constants";
 import { URLS } from "@/constants/constants";
 import { getTagKey } from "@/utils/getTagKey";
 import { removeDuplicates } from "@/utils/removeDuplicates";
@@ -19,6 +19,7 @@ import { LoaderSpinner } from "@/components/LoaderSpinner/LoaderSpinner";
 import { WrapperLoader } from "components/LoaderSpinner/WrapperLoader";
 import { ContainerCards } from "@/components/Cards/ContainerCards";
 import { ErrorMessage } from "@/components/Cards/ErrorMessage";
+import { HeadTag } from "components/HeadTag/HeadTag";
 
 export default function Characters({ types, species }) {
   const [characters, setCharacters] = useState([]);
@@ -123,6 +124,8 @@ export default function Characters({ types, species }) {
 
   return (
     <>
+      <HeadTag title={SEO_TITLES["titleCharacters"]} />
+
       <ContainerButton>
         <Button handleOnClick={openModal} value="Filter" />
       </ContainerButton>
