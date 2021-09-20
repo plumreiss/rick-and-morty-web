@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { API } from "@/constants/constants";
+import { API, SEO_TITLES } from "@/constants/constants";
 import { getNumberRandom } from "@/utils/getNumberRandom";
 import { TitleMain } from "@/components/TitleMain/TitleMain";
 import { Character } from "@/components/Cards/Character";
@@ -7,6 +7,7 @@ import { LoaderSpinner } from "@/components/LoaderSpinner/LoaderSpinner";
 import { WrapperLoader } from "@/components/LoaderSpinner/WrapperLoader";
 import { ContainerCards } from "@/components/Cards/ContainerCards";
 import { ErrorMessage } from "@/components/Cards/ErrorMessage";
+import { HeadTag } from "components/HeadTag/HeadTag";
 
 export default function Main() {
   const [characters, setCharacters] = useState([]);
@@ -78,6 +79,8 @@ export default function Main() {
 
   return (
     <>
+      <HeadTag title={SEO_TITLES["titleHome"]} />
+
       <TitleMain title="Ricknedy" />
       <ContainerCards takeViewportHeight="307.88">
         {isLoading && (

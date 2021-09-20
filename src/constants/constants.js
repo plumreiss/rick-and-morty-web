@@ -15,3 +15,7 @@ export const URLS = {
   episodesPage: "episodes",
   myGithub: "https://github.com/plumreiss",
 };
+
+export const SEO_TITLES = {
+  titleHome: "Ricknedy - Find information about your favorite characters",
+};
