@@ -1,20 +1,24 @@
-import { API } from "@/constants/constants";
+import { API, SEO_TITLES } from "@/constants/constants";
 import { EpisodeCard } from "@/components/Cards/EpisodeCard";
 import { ContainerCards } from "@/components/Cards/ContainerCards";
+import { HeadTag } from "@/components/HeadTag/HeadTag";
 
 export default function Episodes({ episodes }) {
   return (
-    <ContainerCards>
-      {episodes.map(({ id, name, air_date, episode }) => (
-        <EpisodeCard
-          key={id}
-          id={id}
-          name={name}
-          air_date={air_date}
-          episode={episode}
-        />
-      ))}
-    </ContainerCards>
+    <>
+      <HeadTag title={SEO_TITLES["titleEpisodes"]} />
+      <ContainerCards>
+        {episodes.map(({ id, name, air_date, episode }) => (
+          <EpisodeCard
+            key={id}
+            id={id}
+            name={name}
+            air_date={air_date}
+            episode={episode}
+          />
+        ))}
+      </ContainerCards>
+    </>
   );
 }
 
