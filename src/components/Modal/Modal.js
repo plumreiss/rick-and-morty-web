@@ -15,8 +15,8 @@ const ModalContainer = styled.article`
 `;
 const ModalContent = styled.div`
   position: relative;
-  width: 80%;
-  height: 80vh;
+  width: 50%;
+  height: 50vh;
   padding: 20px;
   background-color: #f4f4f4;
   display: flex;
