@@ -83,6 +83,7 @@ export default function Characters({ types, species }) {
         changeIsLoadingState();
       } catch (err) {
         setError(true);
+        changeIsLoadingState();
       }
     };
 
